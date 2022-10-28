@@ -17,6 +17,7 @@
 		391085CD290C6BD100779F89 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085CC290C6BD100779F89 /* Coordinator.swift */; };
 		391085CF290C6C3100779F89 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085CE290C6C3100779F89 /* Router.swift */; };
 		391085D1290C6C9800779F89 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D0290C6C9800779F89 /* DeepLink.swift */; };
+		391085D3290C6ED900779F89 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D2290C6ED900779F89 /* AppCoordinator.swift */; };
 		3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956522E290B0B600089D3BC /* HttpRequest.swift */; };
 		39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565230290B0BFC0089D3BC /* HttpClient.swift */; };
 		39565233290B0C610089D3BC /* DefaultHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565232290B0C610089D3BC /* DefaultHttpClient.swift */; };
@@ -41,6 +42,7 @@
 		391085CC290C6BD100779F89 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		391085CE290C6C3100779F89 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		391085D0290C6C9800779F89 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		391085D2290C6ED900779F89 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3956522E290B0B600089D3BC /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		39565230290B0BFC0089D3BC /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		39565232290B0C610089D3BC /* DefaultHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHttpClient.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				3956522B290B0B150089D3BC /* Core */,
 				397E7033290B053800DB0442 /* AppDelegate.swift */,
 				397E7035290B053800DB0442 /* SceneDelegate.swift */,
+				391085D2290C6ED900779F89 /* AppCoordinator.swift */,
 				397E7037290B053800DB0442 /* ViewController.swift */,
 				397E7039290B053800DB0442 /* Main.storyboard */,
 				397E703C290B053900DB0442 /* Assets.xcassets */,
@@ -314,6 +317,7 @@
 				391085C3290C1F6300779F89 /* UserService.swift in Sources */,
 				39565238290B0F080089D3BC /* OAuthError.swift in Sources */,
 				397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */,
+				391085D3290C6ED900779F89 /* AppCoordinator.swift in Sources */,
 				391085D1290C6C9800779F89 /* DeepLink.swift in Sources */,
 				391085C5290C2A1400779F89 /* UserSession.swift in Sources */,
 				391085C0290C1E4000779F89 /* User.swift in Sources */,
