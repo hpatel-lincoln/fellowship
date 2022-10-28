@@ -14,6 +14,14 @@
 		391085C5290C2A1400779F89 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085C4290C2A1400779F89 /* UserSession.swift */; };
 		391085C8290C2FBB00779F89 /* AuthHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085C7290C2FBB00779F89 /* AuthHttpClient.swift */; };
 		391085CA290C30A200779F89 /* DefaultAuthHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085C9290C30A200779F89 /* DefaultAuthHttpClient.swift */; };
+		391085CD290C6BD100779F89 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085CC290C6BD100779F89 /* Coordinator.swift */; };
+		391085CF290C6C3100779F89 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085CE290C6C3100779F89 /* Router.swift */; };
+		391085D1290C6C9800779F89 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D0290C6C9800779F89 /* DeepLink.swift */; };
+		391085D3290C6ED900779F89 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D2290C6ED900779F89 /* AppCoordinator.swift */; };
+		391085D6290C75E300779F89 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D5290C75E300779F89 /* AuthCoordinator.swift */; };
+		391085D8290C775800779F89 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D7290C775800779F89 /* UIViewController+Extensions.swift */; };
+		391085DA290C77F900779F89 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D9290C77F900779F89 /* Storyboards.swift */; };
+		391085DC290C787000779F89 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 391085DB290C787000779F89 /* Auth.storyboard */; };
 		3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956522E290B0B600089D3BC /* HttpRequest.swift */; };
 		39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565230290B0BFC0089D3BC /* HttpClient.swift */; };
 		39565233290B0C610089D3BC /* DefaultHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565232290B0C610089D3BC /* DefaultHttpClient.swift */; };
@@ -22,7 +30,7 @@
 		3956523A290B0F320089D3BC /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565239290B0F320089D3BC /* OAuthClient.swift */; };
 		397E7034290B053800DB0442 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7033290B053800DB0442 /* AppDelegate.swift */; };
 		397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7035290B053800DB0442 /* SceneDelegate.swift */; };
-		397E7038290B053800DB0442 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7037290B053800DB0442 /* ViewController.swift */; };
+		397E7038290B053800DB0442 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7037290B053800DB0442 /* LoginViewController.swift */; };
 		397E703B290B053800DB0442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397E7039290B053800DB0442 /* Main.storyboard */; };
 		397E703D290B053900DB0442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397E703C290B053900DB0442 /* Assets.xcassets */; };
 		397E7040290B053900DB0442 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397E703E290B053900DB0442 /* LaunchScreen.storyboard */; };
@@ -35,6 +43,14 @@
 		391085C4290C2A1400779F89 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		391085C7290C2FBB00779F89 /* AuthHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHttpClient.swift; sourceTree = "<group>"; };
 		391085C9290C30A200779F89 /* DefaultAuthHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthHttpClient.swift; sourceTree = "<group>"; };
+		391085CC290C6BD100779F89 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		391085CE290C6C3100779F89 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		391085D0290C6C9800779F89 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		391085D2290C6ED900779F89 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		391085D5290C75E300779F89 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		391085D7290C775800779F89 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		391085D9290C77F900779F89 /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
+		391085DB290C787000779F89 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		3956522E290B0B600089D3BC /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		39565230290B0BFC0089D3BC /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		39565232290B0C610089D3BC /* DefaultHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHttpClient.swift; sourceTree = "<group>"; };
@@ -44,7 +60,7 @@
 		397E7030290B053800DB0442 /* Fellowship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fellowship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		397E7033290B053800DB0442 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		397E7035290B053800DB0442 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		397E7037290B053800DB0442 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		397E7037290B053800DB0442 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		397E703A290B053800DB0442 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		397E703C290B053900DB0442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		397E703F290B053900DB0442 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,9 +108,68 @@
 			path = AuthHttpClient;
 			sourceTree = "<group>";
 		};
+		391085CB290C6B9000779F89 /* CoordinatorKit */ = {
+			isa = PBXGroup;
+			children = (
+				391085D0290C6C9800779F89 /* DeepLink.swift */,
+				391085CE290C6C3100779F89 /* Router.swift */,
+				391085CC290C6BD100779F89 /* Coordinator.swift */,
+			);
+			path = CoordinatorKit;
+			sourceTree = "<group>";
+		};
+		391085D4290C759400779F89 /* AuthFlow */ = {
+			isa = PBXGroup;
+			children = (
+				391085D5290C75E300779F89 /* AuthCoordinator.swift */,
+				397E7037290B053800DB0442 /* LoginViewController.swift */,
+			);
+			path = AuthFlow;
+			sourceTree = "<group>";
+		};
+		391085DD290C8AE100779F89 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				397E7033290B053800DB0442 /* AppDelegate.swift */,
+				397E7035290B053800DB0442 /* SceneDelegate.swift */,
+				391085D2290C6ED900779F89 /* AppCoordinator.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		391085DE290C8AFB00779F89 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				391085D9290C77F900779F89 /* Storyboards.swift */,
+				397E7039290B053800DB0442 /* Main.storyboard */,
+				391085DB290C787000779F89 /* Auth.storyboard */,
+				397E703E290B053900DB0442 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		391085DF290C8B3200779F89 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				391085D7290C775800779F89 /* UIViewController+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		391085E0290C8B8700779F89 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				397E703C290B053900DB0442 /* Assets.xcassets */,
+				397E7041290B053900DB0442 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		3956522B290B0B150089D3BC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				391085DF290C8B3200779F89 /* Extensions */,
+				391085CB290C6B9000779F89 /* CoordinatorKit */,
 				3956522C290B0B200089D3BC /* Networking */,
 				39565236290B0EF20089D3BC /* Auth */,
 				391085BE290C1E2500779F89 /* Model */,
@@ -157,13 +232,10 @@
 			isa = PBXGroup;
 			children = (
 				3956522B290B0B150089D3BC /* Core */,
-				397E7033290B053800DB0442 /* AppDelegate.swift */,
-				397E7035290B053800DB0442 /* SceneDelegate.swift */,
-				397E7037290B053800DB0442 /* ViewController.swift */,
-				397E7039290B053800DB0442 /* Main.storyboard */,
-				397E703C290B053900DB0442 /* Assets.xcassets */,
-				397E703E290B053900DB0442 /* LaunchScreen.storyboard */,
-				397E7041290B053900DB0442 /* Info.plist */,
+				391085DD290C8AE100779F89 /* Application */,
+				391085D4290C759400779F89 /* AuthFlow */,
+				391085E0290C8B8700779F89 /* Resources */,
+				391085DE290C8AFB00779F89 /* Storyboards */,
 			);
 			path = Fellowship;
 			sourceTree = "<group>";
@@ -244,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				391085DC290C787000779F89 /* Auth.storyboard in Resources */,
 				397E7040290B053900DB0442 /* LaunchScreen.storyboard in Resources */,
 				397E703D290B053900DB0442 /* Assets.xcassets in Resources */,
 				397E703B290B053800DB0442 /* Main.storyboard in Resources */,
@@ -282,19 +355,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				391085CD290C6BD100779F89 /* Coordinator.swift in Sources */,
 				391085C8290C2FBB00779F89 /* AuthHttpClient.swift in Sources */,
 				3956523A290B0F320089D3BC /* OAuthClient.swift in Sources */,
 				391085CA290C30A200779F89 /* DefaultAuthHttpClient.swift in Sources */,
 				39565233290B0C610089D3BC /* DefaultHttpClient.swift in Sources */,
 				39565235290B0C9C0089D3BC /* NetworkError.swift in Sources */,
 				39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */,
-				397E7038290B053800DB0442 /* ViewController.swift in Sources */,
+				397E7038290B053800DB0442 /* LoginViewController.swift in Sources */,
 				3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */,
 				391085BD290C110400779F89 /* OAuthToken.swift in Sources */,
+				391085D8290C775800779F89 /* UIViewController+Extensions.swift in Sources */,
+				391085D6290C75E300779F89 /* AuthCoordinator.swift in Sources */,
+				391085DA290C77F900779F89 /* Storyboards.swift in Sources */,
+				391085CF290C6C3100779F89 /* Router.swift in Sources */,
 				397E7034290B053800DB0442 /* AppDelegate.swift in Sources */,
 				391085C3290C1F6300779F89 /* UserService.swift in Sources */,
 				39565238290B0F080089D3BC /* OAuthError.swift in Sources */,
 				397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */,
+				391085D3290C6ED900779F89 /* AppCoordinator.swift in Sources */,
+				391085D1290C6C9800779F89 /* DeepLink.swift in Sources */,
 				391085C5290C2A1400779F89 /* UserSession.swift in Sources */,
 				391085C0290C1E4000779F89 /* User.swift in Sources */,
 			);
@@ -446,10 +526,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BJ636W9RZ7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Fellowship/Info.plist;
+				INFOPLIST_FILE = Fellowship/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -478,10 +557,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BJ636W9RZ7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Fellowship/Info.plist;
+				INFOPLIST_FILE = Fellowship/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
