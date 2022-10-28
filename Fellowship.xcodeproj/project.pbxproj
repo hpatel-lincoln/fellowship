@@ -122,13 +122,53 @@
 			isa = PBXGroup;
 			children = (
 				391085D5290C75E300779F89 /* AuthCoordinator.swift */,
+				397E7037290B053800DB0442 /* LoginViewController.swift */,
 			);
 			path = AuthFlow;
+			sourceTree = "<group>";
+		};
+		391085DD290C8AE100779F89 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				397E7033290B053800DB0442 /* AppDelegate.swift */,
+				397E7035290B053800DB0442 /* SceneDelegate.swift */,
+				391085D2290C6ED900779F89 /* AppCoordinator.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		391085DE290C8AFB00779F89 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				391085D9290C77F900779F89 /* Storyboards.swift */,
+				397E7039290B053800DB0442 /* Main.storyboard */,
+				391085DB290C787000779F89 /* Auth.storyboard */,
+				397E703E290B053900DB0442 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		391085DF290C8B3200779F89 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				391085D7290C775800779F89 /* UIViewController+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		391085E0290C8B8700779F89 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				397E703C290B053900DB0442 /* Assets.xcassets */,
+				397E7041290B053900DB0442 /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		3956522B290B0B150089D3BC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				391085DF290C8B3200779F89 /* Extensions */,
 				391085CB290C6B9000779F89 /* CoordinatorKit */,
 				3956522C290B0B200089D3BC /* Networking */,
 				39565236290B0EF20089D3BC /* Auth */,
@@ -192,18 +232,10 @@
 			isa = PBXGroup;
 			children = (
 				3956522B290B0B150089D3BC /* Core */,
+				391085DD290C8AE100779F89 /* Application */,
 				391085D4290C759400779F89 /* AuthFlow */,
-				397E7033290B053800DB0442 /* AppDelegate.swift */,
-				397E7035290B053800DB0442 /* SceneDelegate.swift */,
-				391085D2290C6ED900779F89 /* AppCoordinator.swift */,
-				397E7037290B053800DB0442 /* LoginViewController.swift */,
-				397E7039290B053800DB0442 /* Main.storyboard */,
-				397E703E290B053900DB0442 /* LaunchScreen.storyboard */,
-				391085DB290C787000779F89 /* Auth.storyboard */,
-				397E703C290B053900DB0442 /* Assets.xcassets */,
-				397E7041290B053900DB0442 /* Info.plist */,
-				391085D7290C775800779F89 /* UIViewController+Extensions.swift */,
-				391085D9290C77F900779F89 /* Storyboards.swift */,
+				391085E0290C8B8700779F89 /* Resources */,
+				391085DE290C8AFB00779F89 /* Storyboards */,
 			);
 			path = Fellowship;
 			sourceTree = "<group>";
@@ -494,7 +526,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BJ636W9RZ7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Fellowship/Info.plist;
+				INFOPLIST_FILE = Fellowship/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -525,7 +557,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BJ636W9RZ7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Fellowship/Info.plist;
+				INFOPLIST_FILE = Fellowship/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
