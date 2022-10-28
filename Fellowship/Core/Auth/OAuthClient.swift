@@ -7,6 +7,8 @@
 
 import Foundation
 import CryptoKit
+import PromiseKit
+import AuthenticationServices
 
 class DefaultOAuthClient {
   
@@ -30,6 +32,7 @@ class DefaultOAuthClient {
   private let redirectURI: String
   private let scope: String
   private let httpClient: HttpClient
+  private weak var delegate: ASWebAuthenticationPresentationContextProviding?
   
   private var codeVerifier: String?
   private var state: String?
@@ -38,7 +41,8 @@ class DefaultOAuthClient {
     authHost: String, authPath: String,
     tokenHost: String, tokenPath: String,
     clientID: String, redirectURI: String, scope: String,
-    httpClient: HttpClient = DefaultHttpClient()
+    httpClient: HttpClient = DefaultHttpClient(),
+    delegate: ASWebAuthenticationPresentationContextProviding?
   ) {
     self.authHost = authHost
     self.authPath = authPath
@@ -48,39 +52,79 @@ class DefaultOAuthClient {
     self.redirectURI = redirectURI
     self.scope = scope
     self.httpClient = httpClient
+    self.delegate = delegate
   }
   
-  private func getAuthorizationURL() throws -> URL {
-    codeVerifier = generateCodeVerifier()
-    guard codeVerifier != nil else { throw OAuthError.failedCodeVerifier }
-    
-    let codeChallenge = generateCodeChallenge(fromVerifier: codeVerifier!)
-    guard codeChallenge != nil else { throw OAuthError.failedCodeChallenge }
-    
-    state = UUID.init().uuidString
-    
-    let params = [
-      "response_type": Constants.ResponseType,
-      "client_id": clientID,
-      "redirect_uri": redirectURI,
-      "scope": scope,
-      "state": state,
-      "code_challenge": codeChallenge,
-      "code_challenge_method": Constants.CodeChallengeMethod
-    ]
-    
-    let request = HttpRequest(
-      host: authHost,
-      path: authPath,
-      method: .get,
-      parameters: params,
-      headers: nil
-    )
-    
-    guard let url = request.makeURL() else {
-      throw OAuthError.badAuthorizationURL
+  func authenticate() -> Promise<String> {
+    return firstly {
+      makeAuthorizationURL()
+    }.then { authURL in
+      self.authorize(at: authURL)
     }
-    return url
+  }
+  
+  private func makeAuthorizationURL() -> Promise<URL> {
+    return Promise { seal in
+      codeVerifier = generateCodeVerifier()
+      guard codeVerifier != nil else { throw OAuthError.failedCodeVerifier }
+      
+      let codeChallenge = generateCodeChallenge(fromVerifier: codeVerifier!)
+      guard codeChallenge != nil else { throw OAuthError.failedCodeChallenge }
+      
+      state = UUID.init().uuidString
+      
+      let params = [
+        "response_type": Constants.ResponseType,
+        "client_id": clientID,
+        "redirect_uri": redirectURI,
+        "scope": scope,
+        "state": state,
+        "code_challenge": codeChallenge,
+        "code_challenge_method": Constants.CodeChallengeMethod
+      ]
+      
+      let request = HttpRequest(
+        host: authHost,
+        path: authPath,
+        method: .get,
+        parameters: params,
+        headers: nil
+      )
+      
+      guard let url = request.makeURL() else {
+        throw OAuthError.badAuthorizationURL
+      }
+      
+      seal.fulfill(url)
+    }
+  }
+  
+  private func authorize(at authURL: URL) -> Promise<String> {
+    return Promise { seal in
+      let authenticationSession = ASWebAuthenticationSession(
+        url: authURL, callbackURLScheme: nil
+      ) { optionalURL, optionalError in
+        if let error = optionalError {
+          return seal.reject(error)
+        }
+        
+        guard let url = optionalURL else {
+          return seal.reject(OAuthError.badAuthorizationResponse)
+        }
+        
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let codeQueryItem = components?.queryItems?.first {
+          $0.name == Constants.ResponseType
+        }
+        guard let code = codeQueryItem?.value else {
+          return seal.reject(OAuthError.badAuthorizationResponse)
+        }
+        seal.fulfill(code)
+      }
+      
+      authenticationSession.presentationContextProvider = delegate
+      authenticationSession.start()
+    }
   }
   
   // MARK: - Private methods

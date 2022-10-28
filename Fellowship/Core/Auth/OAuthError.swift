@@ -11,5 +11,6 @@ enum OAuthError: Error {
   case failedCodeVerifier
   case failedCodeChallenge
   case badAuthorizationURL
+  case badAuthorizationResponse
   case invalidJson
 }
