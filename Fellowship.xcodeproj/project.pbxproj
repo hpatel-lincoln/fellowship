@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2708511C3F1CE22D7849F725 /* libPods-Fellowship.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */; };
+		391085BD290C110400779F89 /* OAuthTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085BC290C110400779F89 /* OAuthTokenResponse.swift */; };
 		3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956522E290B0B600089D3BC /* HttpRequest.swift */; };
 		39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565230290B0BFC0089D3BC /* HttpClient.swift */; };
 		39565233290B0C610089D3BC /* DefaultHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565232290B0C610089D3BC /* DefaultHttpClient.swift */; };
 		39565235290B0C9C0089D3BC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565234290B0C9C0089D3BC /* NetworkError.swift */; };
+		39565238290B0F080089D3BC /* OAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565237290B0F080089D3BC /* OAuthError.swift */; };
+		3956523A290B0F320089D3BC /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565239290B0F320089D3BC /* OAuthClient.swift */; };
 		397E7034290B053800DB0442 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7033290B053800DB0442 /* AppDelegate.swift */; };
 		397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7035290B053800DB0442 /* SceneDelegate.swift */; };
 		397E7038290B053800DB0442 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7037290B053800DB0442 /* ViewController.swift */; };
@@ -21,10 +24,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		391085BC290C110400779F89 /* OAuthTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponse.swift; sourceTree = "<group>"; };
 		3956522E290B0B600089D3BC /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		39565230290B0BFC0089D3BC /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		39565232290B0C610089D3BC /* DefaultHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHttpClient.swift; sourceTree = "<group>"; };
 		39565234290B0C9C0089D3BC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		39565237290B0F080089D3BC /* OAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthError.swift; sourceTree = "<group>"; };
+		39565239290B0F320089D3BC /* OAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthClient.swift; sourceTree = "<group>"; };
 		397E7030290B053800DB0442 /* Fellowship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fellowship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		397E7033290B053800DB0442 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		397E7035290B053800DB0442 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				3956522C290B0B200089D3BC /* Networking */,
+				39565236290B0EF20089D3BC /* Auth */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -75,6 +82,16 @@
 				39565232290B0C610089D3BC /* DefaultHttpClient.swift */,
 			);
 			path = HttpClient;
+			sourceTree = "<group>";
+		};
+		39565236290B0EF20089D3BC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				39565237290B0F080089D3BC /* OAuthError.swift */,
+				39565239290B0F320089D3BC /* OAuthClient.swift */,
+				391085BC290C110400779F89 /* OAuthTokenResponse.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		397E7027290B053800DB0442 = {
@@ -226,12 +243,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3956523A290B0F320089D3BC /* OAuthClient.swift in Sources */,
 				39565233290B0C610089D3BC /* DefaultHttpClient.swift in Sources */,
 				39565235290B0C9C0089D3BC /* NetworkError.swift in Sources */,
 				39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */,
 				397E7038290B053800DB0442 /* ViewController.swift in Sources */,
 				3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */,
+				391085BD290C110400779F89 /* OAuthTokenResponse.swift in Sources */,
 				397E7034290B053800DB0442 /* AppDelegate.swift in Sources */,
+				39565238290B0F080089D3BC /* OAuthError.swift in Sources */,
 				397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
