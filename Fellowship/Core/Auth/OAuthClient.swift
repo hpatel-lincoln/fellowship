@@ -55,11 +55,13 @@ class DefaultOAuthClient {
     self.delegate = delegate
   }
   
-  func authenticate() -> Promise<String> {
+  func authenticate() -> Promise<OAuthTokenResponse> {
     return firstly {
       makeAuthorizationURL()
     }.then { authURL in
       self.authorize(at: authURL)
+    }.then { code in
+      self.authenticate(withCode: code)
     }
   }
   
@@ -87,8 +89,7 @@ class DefaultOAuthClient {
         host: authHost,
         path: authPath,
         method: .get,
-        parameters: params,
-        headers: nil
+        parameters: params
       )
       
       guard let url = request.makeURL() else {
@@ -124,6 +125,42 @@ class DefaultOAuthClient {
       
       authenticationSession.presentationContextProvider = delegate
       authenticationSession.start()
+    }
+  }
+  
+  private func authenticate(withCode code: String) -> Promise<OAuthTokenResponse> {
+    guard let verifier = codeVerifier else {
+      return Promise(error: OAuthError.failedCodeVerifier)
+    }
+    
+    let parameters = [
+      "grant_type": "authorization_code",
+      "code": code,
+      "client_id": clientID,
+      "redirect_uri": redirectURI,
+      "code_verifier": verifier
+    ]
+    
+    do {
+      let encoder = JSONEncoder()
+      let httpBody = try encoder.encode(parameters)
+      
+      let request = HttpRequest(
+        host: tokenHost,
+        path: tokenPath,
+        method: .post,
+        httpBody: httpBody
+      )
+      
+      return firstly {
+        httpClient.perform(request: request)
+      }.then { tokenData -> Promise<OAuthTokenResponse> in
+        let decoder = JSONDecoder()
+        let tokenResponse = try decoder.decode(OAuthTokenResponse.self, from: tokenData)
+        return Promise.value(tokenResponse)
+      }
+    } catch {
+      return Promise(error: error)
     }
   }
   

@@ -24,18 +24,21 @@ struct HttpRequest {
   var method              : HttpMethod
   var parameters          : [String: String?]?
   var headers             : [String: String]?
+  var httpBody            : Data?
   
   init(host: String,
        path: String,
        method: HttpMethod,
-       parameters: [String: String?]?,
-       headers: [String: String]?) {
+       parameters: [String: String?]? = nil,
+       headers: [String: String]? = nil,
+       httpBody: Data? = nil) {
     
     self.host = host
     self.path = path
     self.method = method
     self.parameters = parameters
     self.headers = headers
+    self.httpBody = httpBody
   }
 }
 
@@ -45,6 +48,8 @@ extension HttpRequest {
     static let Scheme = "https"
     static let AcceptHeaderKey = "Accept"
     static let AcceptHeaderValue = "application/json"
+    static let ContentTypeHeaderKey = "Content-Type"
+    static let ContentTypeHeaderValue = "application/json"
   }
   
   func makeURL() -> URL? {
@@ -72,7 +77,12 @@ extension HttpRequest {
     request.httpMethod = method.rawValue
     
     request.allHTTPHeaderFields = headers ?? [:]
-    request.setValue(Constants.AcceptHeaderValue, forHTTPHeaderField: Constants.AcceptHeaderKey)
+    request.setValue(Constants.AcceptHeaderValue,
+                     forHTTPHeaderField: Constants.AcceptHeaderKey)
+    request.setValue(Constants.ContentTypeHeaderValue,
+                     forHTTPHeaderField: Constants.ContentTypeHeaderKey)
+    
+    request.httpBody = httpBody
     
     return request
   }

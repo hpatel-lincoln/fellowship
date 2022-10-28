@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2708511C3F1CE22D7849F725 /* libPods-Fellowship.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */; };
+		391085BD290C110400779F89 /* OAuthTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085BC290C110400779F89 /* OAuthTokenResponse.swift */; };
 		3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956522E290B0B600089D3BC /* HttpRequest.swift */; };
 		39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565230290B0BFC0089D3BC /* HttpClient.swift */; };
 		39565233290B0C610089D3BC /* DefaultHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39565232290B0C610089D3BC /* DefaultHttpClient.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		391085BC290C110400779F89 /* OAuthTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponse.swift; sourceTree = "<group>"; };
 		3956522E290B0B600089D3BC /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		39565230290B0BFC0089D3BC /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		39565232290B0C610089D3BC /* DefaultHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHttpClient.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			children = (
 				39565237290B0F080089D3BC /* OAuthError.swift */,
 				39565239290B0F320089D3BC /* OAuthClient.swift */,
+				391085BC290C110400779F89 /* OAuthTokenResponse.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */,
 				397E7038290B053800DB0442 /* ViewController.swift in Sources */,
 				3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */,
+				391085BD290C110400779F89 /* OAuthTokenResponse.swift in Sources */,
 				397E7034290B053800DB0442 /* AppDelegate.swift in Sources */,
 				39565238290B0F080089D3BC /* OAuthError.swift in Sources */,
 				397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */,
