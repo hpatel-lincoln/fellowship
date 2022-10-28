@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  Fellowship
 //
 //  Created by Hardik Patel on 10/27/22.
@@ -9,27 +9,25 @@ import UIKit
 import PromiseKit
 import AuthenticationServices
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
+  
+  var didCompleteLogin: (() -> Void)?
   
   private let userSession = UserSession.shared
   private lazy var authClient = makeTwitterAuthClient()
   private lazy var userService = makeUserService()
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
-  }
-  
   @IBAction
-  func didTapLogin(_ sender: UIButton) {
+  private func didTapLogin(_ sender: UIButton) {
     firstly {
       authClient.authenticate()
     }.then { authToken -> Promise<User> in
       self.userSession.setToken(authToken)
       return self.userService.getUser()
-    }.done { user in
+    }.done { [weak self] user in
+      guard let self = self else { return }
       self.userSession.loginUser(user)
-      print(user)
+      self.didCompleteLogin?()
     }.catch { error in
       print(error)
     }
@@ -56,7 +54,7 @@ class ViewController: UIViewController {
   }
 }
 
-extension ViewController: ASWebAuthenticationPresentationContextProviding {
+extension LoginViewController: ASWebAuthenticationPresentationContextProviding {
   func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
     view.window ?? ASPresentationAnchor()
   }

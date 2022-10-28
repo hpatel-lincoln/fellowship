@@ -39,8 +39,12 @@ class AppCoordinator: NavigationCoordinator {
   }
   
   private func startAuthFlow(with link: DeepLink?) {
-    let controller = UIViewController()
-    controller.view.backgroundColor = .red
-    router.setRootController(controller, hideBar: true)
+    let authCoordinator = AuthCoordinator(router: router)
+    authCoordinator.didCompleteFlow = { [unowned self] in
+      coordinator = nil
+      startMainFlow(with: link)
+    }
+    coordinator = authCoordinator
+    coordinator?.start(with: nil)
   }
 }
