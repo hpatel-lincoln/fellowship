@@ -10,7 +10,19 @@ import CryptoKit
 import PromiseKit
 import AuthenticationServices
 
-class DefaultOAuthClient {
+/**
+ OAuth client to perform OAuth 2.0 flow with PKCE.
+ */
+protocol OAuthClient {
+  /**
+   Authenticate via OAuth 2.0 flow with PKCE
+   
+   - Returns: OAuthToken containing access token, refresh token, and other metadata.
+   */
+  func authenticate() -> Promise<OAuthToken>
+}
+
+class DefaultOAuthClient: OAuthClient {
   
   // MARK: - Constants
   
@@ -55,7 +67,7 @@ class DefaultOAuthClient {
     self.delegate = delegate
   }
   
-  func authenticate() -> Promise<OAuthTokenResponse> {
+  func authenticate() -> Promise<OAuthToken> {
     return firstly {
       makeAuthorizationURL()
     }.then { authURL in
@@ -128,7 +140,7 @@ class DefaultOAuthClient {
     }
   }
   
-  private func authenticate(withCode code: String) -> Promise<OAuthTokenResponse> {
+  private func authenticate(withCode code: String) -> Promise<OAuthToken> {
     guard let verifier = codeVerifier else {
       return Promise(error: OAuthError.failedCodeVerifier)
     }
@@ -154,9 +166,9 @@ class DefaultOAuthClient {
       
       return firstly {
         httpClient.perform(request: request)
-      }.then { tokenData -> Promise<OAuthTokenResponse> in
+      }.then { tokenData -> Promise<OAuthToken> in
         let decoder = JSONDecoder()
-        let tokenResponse = try decoder.decode(OAuthTokenResponse.self, from: tokenData)
+        let tokenResponse = try decoder.decode(OAuthToken.self, from: tokenData)
         return Promise.value(tokenResponse)
       }
     } catch {

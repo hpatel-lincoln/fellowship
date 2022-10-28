@@ -1,5 +1,5 @@
 //
-//  OAuthTokenResponse.swift
+//  OAuthToken.swift
 //  Fellowship
 //
 //  Created by Hardik Patel on 10/28/22.
@@ -7,12 +7,14 @@
 
 import Foundation
 
-struct OAuthTokenResponse: Codable {
+struct OAuthToken: Codable {
   var type: String
   var expiresIn: Int
   var accessToken: String
   var refreshToken: String
   var scope: String
+  
+  let issueDate = Date()
   
   enum CodingKeys: String, CodingKey {
     case type = "token_type"
