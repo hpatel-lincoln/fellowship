@@ -121,15 +121,11 @@ class DefaultOAuthClient: OAuthClient {
           return seal.reject(error)
         }
         
-        guard let url = optionalURL else {
+        guard let authenticationURL = optionalURL else {
           return seal.reject(OAuthError.badAuthorizationResponse)
         }
         
-        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        let codeQueryItem = components?.queryItems?.first {
-          $0.name == Constants.ResponseType
-        }
-        guard let code = codeQueryItem?.value else {
+        guard let code = authenticationURL[Constants.ResponseType] else {
           return seal.reject(OAuthError.badAuthorizationResponse)
         }
         seal.fulfill(code)
