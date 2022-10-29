@@ -34,11 +34,11 @@
 		397E7034290B053800DB0442 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7033290B053800DB0442 /* AppDelegate.swift */; };
 		397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7035290B053800DB0442 /* SceneDelegate.swift */; };
 		397E7038290B053800DB0442 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E7037290B053800DB0442 /* LoginViewController.swift */; };
-		397E703B290B053800DB0442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397E7039290B053800DB0442 /* Main.storyboard */; };
 		397E703D290B053900DB0442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397E703C290B053900DB0442 /* Assets.xcassets */; };
-		397E7040290B053900DB0442 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397E703E290B053900DB0442 /* LaunchScreen.storyboard */; };
 		3981F9B7290DCF5E003611D8 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9B6290DCF5E003611D8 /* URL+Extensions.swift */; };
 		3981F9B9290DD38C003611D8 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9B8290DD38C003611D8 /* Data+Extensions.swift */; };
+		3981F9BD290DDF7A003611D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3981F9BB290DDF7A003611D8 /* LaunchScreen.storyboard */; };
+		3981F9BE290DDF7A003611D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3981F9BC290DDF7A003611D8 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,12 +69,12 @@
 		397E7033290B053800DB0442 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		397E7035290B053800DB0442 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		397E7037290B053800DB0442 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		397E703A290B053800DB0442 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		397E703C290B053900DB0442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		397E703F290B053900DB0442 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		397E7041290B053900DB0442 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3981F9B6290DCF5E003611D8 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		3981F9B8290DD38C003611D8 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		3981F9BB290DDF7A003611D8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3981F9BC290DDF7A003611D8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5939201146305C1E37AD7A3C /* Pods-Fellowship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.release.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.release.xcconfig"; sourceTree = "<group>"; };
 		BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fellowship.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D11F0CB6E08B47F656106A /* Pods-Fellowship.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.debug.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,10 +150,10 @@
 		391085DE290C8AFB00779F89 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				391085D9290C77F900779F89 /* Storyboards.swift */,
-				397E7039290B053800DB0442 /* Main.storyboard */,
 				391085DB290C787000779F89 /* Auth.storyboard */,
-				397E703E290B053900DB0442 /* LaunchScreen.storyboard */,
+				3981F9BC290DDF7A003611D8 /* Main.storyboard */,
+				3981F9BB290DDF7A003611D8 /* LaunchScreen.storyboard */,
+				391085D9290C77F900779F89 /* Storyboards.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -339,10 +339,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3981F9BD290DDF7A003611D8 /* LaunchScreen.storyboard in Resources */,
 				391085DC290C787000779F89 /* Auth.storyboard in Resources */,
-				397E7040290B053900DB0442 /* LaunchScreen.storyboard in Resources */,
 				397E703D290B053900DB0442 /* Assets.xcassets in Resources */,
-				397E703B290B053800DB0442 /* Main.storyboard in Resources */,
+				3981F9BE290DDF7A003611D8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,25 +409,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		397E7039290B053800DB0442 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				397E703A290B053800DB0442 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		397E703E290B053900DB0442 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				397E703F290B053900DB0442 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		397E7042290B053900DB0442 /* Debug */ = {
