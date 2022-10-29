@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 enum FollowList: String, CaseIterable {
   case following = "Following"
@@ -21,7 +22,8 @@ class MainViewController: UIViewController {
     static let UnderlineHeight: CGFloat = 2
   }
   
-  private let userSession = UserSession.shared
+  private let userSession: UserSession = UserSession.shared
+  private let httpClient: HttpClient = DefaultHttpClient()
   
   private var viewControllers: [UIViewController] = []
   private let titles: [String] = FollowList.allCases.map { $0.rawValue }
@@ -49,13 +51,19 @@ class MainViewController: UIViewController {
     setupScrollView()
     addChildViewControllers()
     
-    profileImageView.image = UIImage(systemName: "person.circle")
-    
     nameLabel.font = .preferredFont(forTextStyle: .headline)
     nameLabel.text = userSession.currentUser?.name
     
     usernameLabel.font = .preferredFont(forTextStyle: .caption1)
     usernameLabel.text = userSession.currentUser?.username
+    
+    loadProfileImage()
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    profileImageView.layer.cornerRadius = profileImageView.bounds.height/2
+    profileImageView.clipsToBounds = true
   }
   
   private func setupHeadingView() {
@@ -189,6 +197,38 @@ class MainViewController: UIViewController {
     let pageWidth = scrollView.bounds.width
     let offsetX = currentIndex * pageWidth
     scrollView.contentOffset.x = offsetX
+  }
+  
+  private func loadProfileImage() {
+    profileImageView.image = UIImage(systemName: "person.circle")
+    guard
+      let profileImageURL = userSession.currentUser?.profileImageURL,
+      let components = URLComponents(url: profileImageURL,
+                                     resolvingAgainstBaseURL: false),
+      let host = components.host
+    else {
+      return
+    }
+    
+    let request = HttpRequest(
+      host: host,
+      path: components.path,
+      method: .get
+    )
+    
+    firstly {
+      httpClient.perform(request: request)
+    }.done { [weak self] data in
+      guard
+        let self = self,
+        let image = UIImage(data: data)
+      else {
+        return
+      }
+      self.profileImageView.image = image
+    }.catch { error in
+      print(error)
+    }
   }
 }
 

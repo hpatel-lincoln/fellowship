@@ -41,7 +41,17 @@ struct User: Codable {
     self.id = try container.decode(String.self, forKey: .id)
     self.name = try container.decode(String.self, forKey: .name)
     self.username = try container.decode(String.self, forKey: .username)
-    self.profileImageURL = try container.decodeIfPresent(URL.self, forKey: .profileImageURL)
+    
+    // By default Twitter returns low quality profile image.
+    // Replace with original profile image instead.
+    let normalProfileURL = try container.decodeIfPresent(String.self, forKey: .profileImageURL)
+    if let normalProfileURL = normalProfileURL {
+      let originalProfileURL = normalProfileURL.replacingOccurrences(of: "_normal", with: "")
+      self.profileImageURL = URL(string: originalProfileURL)
+    } else {
+      self.profileImageURL = nil
+    }
+    
     self.followMetrics = try container.decodeIfPresent(FollowMetrics.self, forKey: .followMetrics)
   }
 }
