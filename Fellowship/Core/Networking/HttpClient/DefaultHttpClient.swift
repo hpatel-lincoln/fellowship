@@ -22,6 +22,14 @@ class DefaultHttpClient: HttpClient {
     }
   }
   
+  func perform(request: URLRequest) -> Promise<Data> {
+    return firstly {
+      URLSession.shared.dataTask(.promise, with: request)
+    }.then {
+      self.handle(response: $0.response, data: $0.data)
+    }
+  }
+  
   private func handle(response: URLResponse, data: Data) -> Promise<Data> {
     guard let httpResponse = response as? HTTPURLResponse else {
       return Promise(error: NetworkError.invalidResponse)
