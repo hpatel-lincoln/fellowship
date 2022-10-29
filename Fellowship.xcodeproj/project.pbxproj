@@ -37,6 +37,8 @@
 		397E703B290B053800DB0442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397E7039290B053800DB0442 /* Main.storyboard */; };
 		397E703D290B053900DB0442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397E703C290B053900DB0442 /* Assets.xcassets */; };
 		397E7040290B053900DB0442 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397E703E290B053900DB0442 /* LaunchScreen.storyboard */; };
+		3981F9B7290DCF5E003611D8 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9B6290DCF5E003611D8 /* URL+Extensions.swift */; };
+		3981F9B9290DD38C003611D8 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9B8290DD38C003611D8 /* Data+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		397E703C290B053900DB0442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		397E703F290B053900DB0442 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		397E7041290B053900DB0442 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3981F9B6290DCF5E003611D8 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		3981F9B8290DD38C003611D8 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		5939201146305C1E37AD7A3C /* Pods-Fellowship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.release.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.release.xcconfig"; sourceTree = "<group>"; };
 		BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fellowship.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D11F0CB6E08B47F656106A /* Pods-Fellowship.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.debug.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.debug.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 			children = (
 				391085D7290C775800779F89 /* UIViewController+Extensions.swift */,
 				391085E4290CA18E00779F89 /* UIColor+Extensions.swift */,
+				3981F9B6290DCF5E003611D8 /* URL+Extensions.swift */,
+				3981F9B8290DD38C003611D8 /* Data+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -384,11 +390,13 @@
 				3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */,
 				391085BD290C110400779F89 /* OAuthToken.swift in Sources */,
 				391085D8290C775800779F89 /* UIViewController+Extensions.swift in Sources */,
+				3981F9B9290DD38C003611D8 /* Data+Extensions.swift in Sources */,
 				391085D6290C75E300779F89 /* AuthCoordinator.swift in Sources */,
 				391085DA290C77F900779F89 /* Storyboards.swift in Sources */,
 				391085CF290C6C3100779F89 /* Router.swift in Sources */,
 				397E7034290B053800DB0442 /* AppDelegate.swift in Sources */,
 				391085C3290C1F6300779F89 /* UserService.swift in Sources */,
+				3981F9B7290DCF5E003611D8 /* URL+Extensions.swift in Sources */,
 				39565238290B0F080089D3BC /* OAuthError.swift in Sources */,
 				397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */,
 				391085E5290CA18E00779F89 /* UIColor+Extensions.swift in Sources */,

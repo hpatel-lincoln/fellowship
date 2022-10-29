@@ -19,4 +19,12 @@ protocol HttpClient {
    - Returns: Http response data.
    */
   func perform(request: HttpRequest) -> Promise<Data>
+  
+  /**
+   Perform URL request and return the response.
+   
+   - Parameter request: URL request to perform.
+   - Returns: Http response data.
+   */
+  func perform(request: URLRequest) -> Promise<Data>
 }
