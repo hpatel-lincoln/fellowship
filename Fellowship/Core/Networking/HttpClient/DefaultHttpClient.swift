@@ -15,11 +15,7 @@ class DefaultHttpClient: HttpClient {
       return Promise(error: NetworkError.invalidURL)
     }
     
-    return firstly {
-      URLSession.shared.dataTask(.promise, with: urlRequest)
-    }.then {
-      self.handle(response: $0.response, data: $0.data)
-    }
+    return perform(request: urlRequest)
   }
   
   func perform(request: URLRequest) -> Promise<Data> {

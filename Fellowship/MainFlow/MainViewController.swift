@@ -202,20 +202,12 @@ class MainViewController: UIViewController {
   private func loadProfileImage() {
     profileImageView.image = UIImage(systemName: "person.circle")
     guard
-      let profileImageURL = userSession.currentUser?.profileImageURL,
-      let components = URLComponents(url: profileImageURL,
-                                     resolvingAgainstBaseURL: false),
-      let host = components.host
+      let profileImageURL = userSession.currentUser?.profileImageURL
     else {
       return
     }
     
-    let request = HttpRequest(
-      host: host,
-      path: components.path,
-      method: .get
-    )
-    
+    let request = URLRequest(url: profileImageURL)
     firstly {
       httpClient.perform(request: request)
     }.done { [weak self] data in
