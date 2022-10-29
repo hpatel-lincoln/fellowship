@@ -182,12 +182,8 @@ class DefaultOAuthClient: OAuthClient {
       return nil
     }
     
-    let verifier = Data(buffer).base64EncodedString()
-      .replacingOccurrences(of: "=", with: "")
-      .replacingOccurrences(of: "+", with: "-")
-      .replacingOccurrences(of: "/", with: "_")
-      .trimmingCharacters(in: .whitespaces)
-    return verifier
+    let encoded = Data(buffer).base64URLEncoded
+    return encoded
   }
   
   private func generateCodeChallenge(fromVerifier verifier: String) -> String? {
@@ -196,11 +192,7 @@ class DefaultOAuthClient: OAuthClient {
     }
     
     let hashed = SHA256.hash(data: data)
-    let encoded = Data(hashed).base64EncodedString()
-      .replacingOccurrences(of: "=", with: "")
-      .replacingOccurrences(of: "+", with: "-")
-      .replacingOccurrences(of: "/", with: "_")
-      .trimmingCharacters(in: .whitespaces)
+    let encoded = Data(hashed).base64URLEncoded
     return encoded
   }
 }
