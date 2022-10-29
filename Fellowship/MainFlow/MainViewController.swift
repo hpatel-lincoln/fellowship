@@ -15,21 +15,28 @@ enum FollowList: String, CaseIterable {
 class MainViewController: UIViewController {
   
   struct Constants {
-    static let UnderlineHeight: CGFloat = 2
-    static let HeadingViewHeight: CGFloat = 188
-    static let PageControlHeight: CGFloat = 40
     static let StandardMargin: CGFloat = 8
+    static let ProfileImageViewHeight: CGFloat = 80
+    static let PageControlHeight: CGFloat = 40
+    static let UnderlineHeight: CGFloat = 2
   }
+  
+  private let userSession = UserSession.shared
   
   private var viewControllers: [UIViewController] = []
   private let titles: [String] = FollowList.allCases.map { $0.rawValue }
   private var maxHeadingTopOffset: CGFloat {
-    Constants.HeadingViewHeight - Constants.PageControlHeight
+    headingView.bounds.height - Constants.PageControlHeight
   }
   
   private var headingView: UIView!
   private var headingViewTop = NSLayoutConstraint()
+  private var profileImageView: UIImageView!
+  private var nameLabel: UILabel!
+  private var usernameLabel: UILabel!
+  
   private var pageControl: PageControl!
+  
   private var scrollView: UIScrollView!
   private var stackView: UIStackView!
   
@@ -41,6 +48,14 @@ class MainViewController: UIViewController {
     setupPageControl()
     setupScrollView()
     addChildViewControllers()
+    
+    profileImageView.image = UIImage(systemName: "person.circle")
+    
+    nameLabel.font = .preferredFont(forTextStyle: .headline)
+    nameLabel.text = userSession.currentUser?.name
+    
+    usernameLabel.font = .preferredFont(forTextStyle: .caption1)
+    usernameLabel.text = userSession.currentUser?.username
   }
   
   private func setupHeadingView() {
@@ -48,21 +63,51 @@ class MainViewController: UIViewController {
     view.addSubview(headingView)
     headingView.translatesAutoresizingMaskIntoConstraints = false
     headingViewTop = headingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-    
     let headingViewCon = [
       headingViewTop,
       headingView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-      headingView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-      headingView.heightAnchor.constraint(equalToConstant: Constants.HeadingViewHeight)
+      headingView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
     ]
     NSLayoutConstraint.activate(headingViewCon)
+    
+    profileImageView = UIImageView()
+    headingView.addSubview(profileImageView)
+    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+    let profileImageViewCon = [
+      profileImageView.topAnchor.constraint(equalTo: headingView.topAnchor,
+                                            constant: Constants.StandardMargin*2),
+      profileImageView.heightAnchor.constraint(equalToConstant: Constants.ProfileImageViewHeight),
+      profileImageView.centerXAnchor.constraint(equalTo: headingView.centerXAnchor),
+      profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor)
+    ]
+    NSLayoutConstraint.activate(profileImageViewCon)
+    
+    nameLabel = UILabel()
+    headingView.addSubview(nameLabel)
+    nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    let nameLabelCon = [
+      nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor,
+                                     constant: Constants.StandardMargin),
+      nameLabel.centerXAnchor.constraint(equalTo: headingView.centerXAnchor)
+    ]
+    NSLayoutConstraint.activate(nameLabelCon)
+    
+    usernameLabel = UILabel()
+    headingView.addSubview(usernameLabel)
+    usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+    let usernameLabelCon = [
+      usernameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor,
+                                         constant: Constants.StandardMargin*0.5),
+      usernameLabel.centerXAnchor.constraint(equalTo: headingView.centerXAnchor)
+    ]
+    NSLayoutConstraint.activate(usernameLabelCon)
   }
   
   private func setupPageControl() {
     let options = PageControlOptions(underlineHeight: Constants.UnderlineHeight,
                                      underlineColor: view.tintColor,
                                      titleFont: UIFont.preferredFont(forTextStyle: .headline),
-                                     titleColor: view.tintColor,
+                                     titleColor: nil,
                                      titles: titles)
     
     pageControl = PageControl(frame: .zero, options: options)
@@ -73,6 +118,8 @@ class MainViewController: UIViewController {
     let pageControlCon = [
       pageControl.centerXAnchor.constraint(equalTo: headingView.centerXAnchor),
       pageControl.widthAnchor.constraint(equalTo: headingView.widthAnchor, multiplier: 0.6),
+      pageControl.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor,
+                                       constant: Constants.StandardMargin*2),
       pageControl.bottomAnchor.constraint(equalTo: headingView.bottomAnchor),
       pageControl.heightAnchor.constraint(equalToConstant: Constants.PageControlHeight)
     ]
