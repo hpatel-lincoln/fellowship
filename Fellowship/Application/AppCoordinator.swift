@@ -33,9 +33,8 @@ class AppCoordinator: NavigationCoordinator {
   }
   
   private func startMainFlow(with link: DeepLink?) {
-    let controller = UIViewController()
-    controller.view.backgroundColor = .green
-    router.setRootController(controller, hideBar: true)
+    let mainViewController = MainViewController()
+    router.setRootController(mainViewController, hideBar: true)
   }
   
   private func startAuthFlow(with link: DeepLink?) {
