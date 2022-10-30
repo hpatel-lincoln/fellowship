@@ -22,7 +22,7 @@ protocol OAuthClient {
   func authenticate() -> Promise<OAuthToken>
 }
 
-class DefaultOAuthClient: OAuthClient {
+class DefaultOAuthClient: NSObject, OAuthClient {
   
   // MARK: - Constants
   
@@ -44,7 +44,6 @@ class DefaultOAuthClient: OAuthClient {
   private let redirectURI: String
   private let scope: String
   private let httpClient: HttpClient
-  private weak var delegate: ASWebAuthenticationPresentationContextProviding?
   
   private var codeVerifier: String?
   private var state: String?
@@ -53,8 +52,7 @@ class DefaultOAuthClient: OAuthClient {
     authHost: String, authPath: String,
     tokenHost: String, tokenPath: String,
     clientID: String, redirectURI: String, scope: String,
-    httpClient: HttpClient = DefaultHttpClient(),
-    delegate: ASWebAuthenticationPresentationContextProviding?
+    httpClient: HttpClient = DefaultHttpClient()
   ) {
     self.authHost = authHost
     self.authPath = authPath
@@ -64,7 +62,6 @@ class DefaultOAuthClient: OAuthClient {
     self.redirectURI = redirectURI
     self.scope = scope
     self.httpClient = httpClient
-    self.delegate = delegate
   }
   
   func authenticate() -> Promise<OAuthToken> {
@@ -131,7 +128,7 @@ class DefaultOAuthClient: OAuthClient {
         seal.fulfill(code)
       }
       
-      authenticationSession.presentationContextProvider = delegate
+      authenticationSession.presentationContextProvider = self
       authenticationSession.start()
     }
   }
@@ -194,5 +191,11 @@ class DefaultOAuthClient: OAuthClient {
     let hashed = SHA256.hash(data: data)
     let encoded = Data(hashed).base64URLEncoded
     return encoded
+  }
+}
+
+extension DefaultOAuthClient: ASWebAuthenticationPresentationContextProviding {
+  func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+    ASPresentationAnchor()
   }
 }
