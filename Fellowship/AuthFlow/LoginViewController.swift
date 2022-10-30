@@ -24,6 +24,7 @@ class LoginViewController: UIViewController {
   }
   
   @IBOutlet var coverImageView: UIImageView!
+  @IBOutlet var coverImageViewBottom: NSLayoutConstraint!
   @IBOutlet var loginButton: UIButton!
   
   override func viewDidLoad() {
@@ -33,11 +34,17 @@ class LoginViewController: UIViewController {
     setupLoginButton()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    animateCoverImageView()
+  }
+  
   private func setupCoverImageView() {
     coverImageView.image = UIImage(named: "twitter")?
       .withRenderingMode(.alwaysTemplate)
     coverImageView.tintColor = view.tintColor
     coverImageView.layer.cornerRadius = 16
+    coverImageViewBottom.constant = 16
   }
   
   private func setupLoginButton() {
@@ -67,6 +74,13 @@ class LoginViewController: UIViewController {
       configuration?.title = loggingIn ? "Logging In..." : "Login"
       button.isEnabled = !loggingIn
       button.configuration = configuration
+    }
+  }
+  
+  private func animateCoverImageView() {
+    coverImageViewBottom.constant = 96
+    UIView.animate(withDuration: 0.5) { [weak self] in
+      self?.view.layoutIfNeeded()
     }
   }
   
