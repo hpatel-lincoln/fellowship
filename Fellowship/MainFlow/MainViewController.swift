@@ -8,7 +8,7 @@
 import UIKit
 import PromiseKit
 
-enum FollowList: String, CaseIterable {
+enum MainFollowList: String, CaseIterable {
   case following = "Following"
   case followers = "Followers"
 }
@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
   private let httpClient: HttpClient = DefaultHttpClient()
   
   private var viewControllers: [UIViewController] = []
-  private let titles: [String] = FollowList.allCases.map { $0.rawValue }
+  private let titles: [String] = MainFollowList.allCases.map { $0.rawValue }
   private var maxHeadingTopOffset: CGFloat {
     headingView.bounds.height - Constants.PageControlHeight
   }
@@ -170,7 +170,7 @@ class MainViewController: UIViewController {
   }
   
   private func addChildViewControllers() {
-    for list in FollowList.allCases {
+    for list in MainFollowList.allCases {
       let viewController = createViewController(withList: list)
       viewControllers.append(viewController)
       
@@ -185,7 +185,7 @@ class MainViewController: UIViewController {
     }
   }
   
-  private func createViewController(withList list: FollowList) -> UIViewController {
+  private func createViewController(withList list: MainFollowList) -> UIViewController {
     let viewController = UIViewController()
     viewController.view.backgroundColor = .systemBackground
     return viewController
