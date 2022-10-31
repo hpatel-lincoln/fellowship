@@ -57,6 +57,6 @@ class AuthCoordinator: NavigationCoordinator {
       httpClient: DefaultHttpClient(),
       userSession: UserSession.shared
     )
-    return UserService(authHttpClient: authHttpClient)
+    return DefaultUserService(authHttpClient: authHttpClient)
   }
 }

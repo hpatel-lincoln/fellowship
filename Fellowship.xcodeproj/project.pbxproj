@@ -40,6 +40,7 @@
 		3981F9C5290DEB07003611D8 /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9C2290DEB07003611D8 /* OAuthClient.swift */; };
 		3981F9CF291070C7003611D8 /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9CE291070C7003611D8 /* UIStoryboard+Extensions.swift */; };
 		3981F9D1291075BD003611D8 /* DefaultOAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9D0291075BD003611D8 /* DefaultOAuthClient.swift */; };
+		3981F9D4291076A4003611D8 /* DefaultUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9D3291076A4003611D8 /* DefaultUserService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		3981F9C2290DEB07003611D8 /* OAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthClient.swift; sourceTree = "<group>"; };
 		3981F9CE291070C7003611D8 /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
 		3981F9D0291075BD003611D8 /* DefaultOAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOAuthClient.swift; sourceTree = "<group>"; };
+		3981F9D3291076A4003611D8 /* DefaultUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserService.swift; sourceTree = "<group>"; };
 		5939201146305C1E37AD7A3C /* Pods-Fellowship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.release.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.release.xcconfig"; sourceTree = "<group>"; };
 		BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fellowship.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D11F0CB6E08B47F656106A /* Pods-Fellowship.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.debug.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.debug.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				391085C2290C1F6300779F89 /* UserService.swift */,
+				3981F9D3291076A4003611D8 /* DefaultUserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				3981F9CF291070C7003611D8 /* UIStoryboard+Extensions.swift in Sources */,
 				39565235290B0C9C0089D3BC /* NetworkError.swift in Sources */,
 				3981F9C3290DEB07003611D8 /* OAuthError.swift in Sources */,
+				3981F9D4291076A4003611D8 /* DefaultUserService.swift in Sources */,
 				39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */,
 				3981F9C5290DEB07003611D8 /* OAuthClient.swift in Sources */,
 				397E7038290B053800DB0442 /* LoginViewController.swift in Sources */,
