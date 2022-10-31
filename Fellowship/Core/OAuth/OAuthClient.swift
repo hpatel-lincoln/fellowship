@@ -22,18 +22,15 @@ protocol OAuthClient {
   func authenticate() -> Promise<OAuthToken>
 }
 
-class DefaultOAuthClient: OAuthClient {
+class DefaultOAuthClient: NSObject, OAuthClient {
   
   // MARK: - Constants
   
   private struct Constants {
     static let ResponseType = "code"
     static let CodeChallengeMethod = "S256"
-    static let CodeVerifierKey = "code_verifier"
     static let StateKey = "state"
-    static let AuthCodeKey = "code"
     static let AuthCodeGrantType = "authorization_code"
-    static let RefreshTokenGrantType = "refresh_token"
   }
   
   private let authHost: String
@@ -44,7 +41,6 @@ class DefaultOAuthClient: OAuthClient {
   private let redirectURI: String
   private let scope: String
   private let httpClient: HttpClient
-  private weak var delegate: ASWebAuthenticationPresentationContextProviding?
   
   private var codeVerifier: String?
   private var state: String?
@@ -53,8 +49,7 @@ class DefaultOAuthClient: OAuthClient {
     authHost: String, authPath: String,
     tokenHost: String, tokenPath: String,
     clientID: String, redirectURI: String, scope: String,
-    httpClient: HttpClient = DefaultHttpClient(),
-    delegate: ASWebAuthenticationPresentationContextProviding?
+    httpClient: HttpClient = DefaultHttpClient()
   ) {
     self.authHost = authHost
     self.authPath = authPath
@@ -64,7 +59,6 @@ class DefaultOAuthClient: OAuthClient {
     self.redirectURI = redirectURI
     self.scope = scope
     self.httpClient = httpClient
-    self.delegate = delegate
   }
   
   func authenticate() -> Promise<OAuthToken> {
@@ -80,10 +74,10 @@ class DefaultOAuthClient: OAuthClient {
   private func makeAuthorizationURL() -> Promise<URL> {
     return Promise { seal in
       codeVerifier = generateCodeVerifier()
-      guard codeVerifier != nil else { throw OAuthError.failedCodeVerifier }
+      guard codeVerifier != nil else { throw OAuthError.failedProducingCodeVerifier }
       
       let codeChallenge = generateCodeChallenge(fromVerifier: codeVerifier!)
-      guard codeChallenge != nil else { throw OAuthError.failedCodeChallenge }
+      guard codeChallenge != nil else { throw OAuthError.failedProducingCodeChallenge }
       
       state = UUID.init().uuidString
       
@@ -105,7 +99,7 @@ class DefaultOAuthClient: OAuthClient {
       )
       
       guard let url = request.makeURL() else {
-        throw OAuthError.badAuthorizationURL
+        throw OAuthError.failedProducingAuthURL
       }
       
       seal.fulfill(url)
@@ -113,6 +107,10 @@ class DefaultOAuthClient: OAuthClient {
   }
   
   private func authorize(at authURL: URL) -> Promise<String> {
+    guard let storedState = state else {
+      return Promise(error: OAuthError.failedProducingState)
+    }
+    
     return Promise { seal in
       let authenticationSession = ASWebAuthenticationSession(
         url: authURL, callbackURLScheme: nil
@@ -122,27 +120,35 @@ class DefaultOAuthClient: OAuthClient {
         }
         
         guard let authenticationURL = optionalURL else {
-          return seal.reject(OAuthError.badAuthorizationResponse)
+          return seal.reject(OAuthError.invalidAuthResponse)
+        }
+        
+        guard let stateValue = authenticationURL[Constants.StateKey] else {
+          return seal.reject(OAuthError.invalidAuthResponseNoState)
+        }
+        
+        guard storedState == stateValue else {
+          return seal.reject(OAuthError.invalidAuthResponseBadState)
         }
         
         guard let code = authenticationURL[Constants.ResponseType] else {
-          return seal.reject(OAuthError.badAuthorizationResponse)
+          return seal.reject(OAuthError.invalidAuthResponseNoCode)
         }
         seal.fulfill(code)
       }
       
-      authenticationSession.presentationContextProvider = delegate
+      authenticationSession.presentationContextProvider = self
       authenticationSession.start()
     }
   }
   
   private func authenticate(withCode code: String) -> Promise<OAuthToken> {
     guard let verifier = codeVerifier else {
-      return Promise(error: OAuthError.failedCodeVerifier)
+      return Promise(error: OAuthError.failedProducingCodeVerifier)
     }
     
     let parameters = [
-      "grant_type": "authorization_code",
+      "grant_type": Constants.AuthCodeGrantType,
       "code": code,
       "client_id": clientID,
       "redirect_uri": redirectURI,
@@ -194,5 +200,11 @@ class DefaultOAuthClient: OAuthClient {
     let hashed = SHA256.hash(data: data)
     let encoded = Data(hashed).base64URLEncoded
     return encoded
+  }
+}
+
+extension DefaultOAuthClient: ASWebAuthenticationPresentationContextProviding {
+  func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+    ASPresentationAnchor()
   }
 }
