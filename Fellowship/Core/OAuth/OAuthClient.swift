@@ -29,11 +29,8 @@ class DefaultOAuthClient: NSObject, OAuthClient {
   private struct Constants {
     static let ResponseType = "code"
     static let CodeChallengeMethod = "S256"
-    static let CodeVerifierKey = "code_verifier"
     static let StateKey = "state"
-    static let AuthCodeKey = "code"
     static let AuthCodeGrantType = "authorization_code"
-    static let RefreshTokenGrantType = "refresh_token"
   }
   
   private let authHost: String
@@ -77,10 +74,10 @@ class DefaultOAuthClient: NSObject, OAuthClient {
   private func makeAuthorizationURL() -> Promise<URL> {
     return Promise { seal in
       codeVerifier = generateCodeVerifier()
-      guard codeVerifier != nil else { throw OAuthError.failedCodeVerifier }
+      guard codeVerifier != nil else { throw OAuthError.failedProducingCodeVerifier }
       
       let codeChallenge = generateCodeChallenge(fromVerifier: codeVerifier!)
-      guard codeChallenge != nil else { throw OAuthError.failedCodeChallenge }
+      guard codeChallenge != nil else { throw OAuthError.failedProducingCodeChallenge }
       
       state = UUID.init().uuidString
       
@@ -102,7 +99,7 @@ class DefaultOAuthClient: NSObject, OAuthClient {
       )
       
       guard let url = request.makeURL() else {
-        throw OAuthError.badAuthorizationURL
+        throw OAuthError.failedProducingAuthURL
       }
       
       seal.fulfill(url)
@@ -110,6 +107,10 @@ class DefaultOAuthClient: NSObject, OAuthClient {
   }
   
   private func authorize(at authURL: URL) -> Promise<String> {
+    guard let storedState = state else {
+      return Promise(error: OAuthError.failedProducingState)
+    }
+    
     return Promise { seal in
       let authenticationSession = ASWebAuthenticationSession(
         url: authURL, callbackURLScheme: nil
@@ -119,11 +120,19 @@ class DefaultOAuthClient: NSObject, OAuthClient {
         }
         
         guard let authenticationURL = optionalURL else {
-          return seal.reject(OAuthError.badAuthorizationResponse)
+          return seal.reject(OAuthError.invalidAuthResponse)
+        }
+        
+        guard let stateValue = authenticationURL[Constants.StateKey] else {
+          return seal.reject(OAuthError.invalidAuthResponseNoState)
+        }
+        
+        guard storedState == stateValue else {
+          return seal.reject(OAuthError.invalidAuthResponseBadState)
         }
         
         guard let code = authenticationURL[Constants.ResponseType] else {
-          return seal.reject(OAuthError.badAuthorizationResponse)
+          return seal.reject(OAuthError.invalidAuthResponseNoCode)
         }
         seal.fulfill(code)
       }
@@ -135,11 +144,11 @@ class DefaultOAuthClient: NSObject, OAuthClient {
   
   private func authenticate(withCode code: String) -> Promise<OAuthToken> {
     guard let verifier = codeVerifier else {
-      return Promise(error: OAuthError.failedCodeVerifier)
+      return Promise(error: OAuthError.failedProducingCodeVerifier)
     }
     
     let parameters = [
-      "grant_type": "authorization_code",
+      "grant_type": Constants.AuthCodeGrantType,
       "code": code,
       "client_id": clientID,
       "redirect_uri": redirectURI,

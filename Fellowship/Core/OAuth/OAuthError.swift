@@ -7,10 +7,13 @@
 
 import Foundation
 
-enum OAuthError: Error {
-  case failedCodeVerifier
-  case failedCodeChallenge
-  case badAuthorizationURL
-  case badAuthorizationResponse
-  case invalidJson
+enum OAuthError: Error {  
+  case failedProducingCodeVerifier
+  case failedProducingCodeChallenge
+  case failedProducingState
+  case failedProducingAuthURL
+  case invalidAuthResponse
+  case invalidAuthResponseNoState
+  case invalidAuthResponseBadState
+  case invalidAuthResponseNoCode
 }
