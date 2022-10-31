@@ -8,14 +8,20 @@
 import Foundation
 
 class MainCoordinator: NavigationCoordinator {
-  private(set) var hasStarted: Bool = false
-  private(set) var coordinator: Coordinator?
-  private(set) var router: Router
   
   var didCompleteFlow: (() -> Void)?
   
-  init(router: Router) {
+  private(set) var hasStarted: Bool = false
+  private(set) var coordinator: Coordinator?
+  private(set) var router: Router
+  private let viewControllerFactory: MainFlowViewControllerFactory
+  
+  init(
+    router: Router,
+    viewControllerFactory: MainFlowViewControllerFactory
+  ) {
     self.router = router
+    self.viewControllerFactory = viewControllerFactory
   }
   
   func start(with link: DeepLink?) {
@@ -26,10 +32,7 @@ class MainCoordinator: NavigationCoordinator {
   }
   
   private func showMain() {
-    let mainViewController = MainViewController(
-      userSession: UserSession.shared,
-      httpClient: DefaultHttpClient()
-    )
+    let mainViewController = viewControllerFactory.makeMainViewController()
     router.setRootController(mainViewController)
   }
 }
