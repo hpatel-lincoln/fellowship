@@ -33,7 +33,10 @@ class AppCoordinator: NavigationCoordinator {
   }
   
   private func startMainFlow(with link: DeepLink?) {
-    let mainViewController = MainViewController()
+    let mainViewController = MainViewController(
+      userSession: UserSession.shared,
+      httpClient: DefaultHttpClient()
+    )
     router.setRootController(mainViewController, hideBar: true)
   }
   
