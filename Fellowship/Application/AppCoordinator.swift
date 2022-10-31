@@ -33,11 +33,9 @@ class AppCoordinator: NavigationCoordinator {
   }
   
   private func startMainFlow(with link: DeepLink?) {
-    let mainViewController = MainViewController(
-      userSession: UserSession.shared,
-      httpClient: DefaultHttpClient()
-    )
-    router.setRootController(mainViewController, hideBar: true)
+    let mainCoordinator = MainCoordinator(router: router)
+    coordinator = mainCoordinator
+    coordinator?.start(with: link)
   }
   
   private func startAuthFlow(with link: DeepLink?) {
