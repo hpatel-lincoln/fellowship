@@ -50,7 +50,7 @@ extension ViewControllerFactory: MainFlowViewControllerFactory {
   func makeMainViewController() -> MainViewController {
     let mainViewController = MainViewController(
       userSession: userSession,
-      httpClient: DefaultHttpClient()
+      httpClient: httpClient
     )
     return mainViewController
   }

@@ -14,14 +14,14 @@ class MainCoordinator: NavigationCoordinator {
   private(set) var hasStarted: Bool = false
   private(set) var coordinator: Coordinator?
   private(set) var router: Router
-  private let viewControllerFactory: MainFlowViewControllerFactory
+  private let factory: MainFlowViewControllerFactory
   
   init(
     router: Router,
-    viewControllerFactory: MainFlowViewControllerFactory
+    factory: MainFlowViewControllerFactory
   ) {
     self.router = router
-    self.viewControllerFactory = viewControllerFactory
+    self.factory = factory
   }
   
   func start(with link: DeepLink?) {
@@ -32,7 +32,7 @@ class MainCoordinator: NavigationCoordinator {
   }
   
   private func showMain() {
-    let mainViewController = viewControllerFactory.makeMainViewController()
+    let mainViewController = factory.makeMainViewController()
     router.setRootController(mainViewController)
   }
 }
