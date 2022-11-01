@@ -24,15 +24,17 @@ class MainViewController: UIViewController {
   
   private let userSession: UserSession
   private let httpClient: HttpClient
+  private let followSearchService: FollowSearchService
   
   @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("This class does not support NSCoder")
   }
   
-  init(userSession: UserSession, httpClient: HttpClient) {
+  init(userSession: UserSession, httpClient: HttpClient, followSearchService: FollowSearchService) {
     self.userSession = userSession
     self.httpClient = httpClient
+    self.followSearchService = followSearchService
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -69,6 +71,8 @@ class MainViewController: UIViewController {
     usernameLabel.text = userSession.currentUser?.username
     
     loadProfileImage()
+    loadFollowing()
+    loadFollowers()
   }
   
   override func viewWillLayoutSubviews() {
@@ -229,6 +233,38 @@ class MainViewController: UIViewController {
         return
       }
       self.profileImageView.image = image
+    }.catch { error in
+      print(error)
+    }
+  }
+  
+  private func loadFollowing() {
+    guard let currentUser = userSession.currentUser else {
+      return
+    }
+    
+    firstly {
+      followSearchService.getFollowing(forUser: currentUser.id)
+    }.done { userList in
+      print("--- Following(\(userList.users.count)) ---")
+      print(userList.users)
+      print("--- End ---")
+    }.catch { error in
+      print(error)
+    }
+  }
+  
+  private func loadFollowers() {
+    guard let currentUser = userSession.currentUser else {
+      return
+    }
+    
+    firstly {
+      followSearchService.getFollowers(forUser: currentUser.id)
+    }.done { userList in
+      print("--- Followers(\(userList.users.count)) ---")
+      print(userList.users)
+      print("--- End ---")
     }.catch { error in
       print(error)
     }

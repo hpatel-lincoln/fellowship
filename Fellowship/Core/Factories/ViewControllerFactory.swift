@@ -50,7 +50,8 @@ extension ViewControllerFactory: MainFlowViewControllerFactory {
   func makeMainViewController() -> MainViewController {
     let mainViewController = MainViewController(
       userSession: userSession,
-      httpClient: httpClient
+      httpClient: httpClient,
+      followSearchService: makeFollowSearchService()
     )
     return mainViewController
   }
@@ -60,5 +61,9 @@ extension ViewControllerFactory: MainFlowViewControllerFactory {
 extension ViewControllerFactory {
   private func makeUserService() -> UserService {
     return DefaultUserService(authHttpClient: authHttpClient)
+  }
+  
+  private func makeFollowSearchService() -> FollowSearchService {
+    return DefaultFollowSearchService(authHttpClient: authHttpClient)
   }
 }
