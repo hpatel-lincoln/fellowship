@@ -22,8 +22,19 @@ class MainViewController: UIViewController {
     static let UnderlineHeight: CGFloat = 2
   }
   
-  private let userSession: UserSession = UserSession.shared
-  private let httpClient: HttpClient = DefaultHttpClient()
+  private let userSession: UserSession
+  private let httpClient: HttpClient
+  
+  @available(*, unavailable)
+  required init?(coder: NSCoder) {
+    fatalError("This class does not support NSCoder")
+  }
+  
+  init(userSession: UserSession, httpClient: HttpClient) {
+    self.userSession = userSession
+    self.httpClient = httpClient
+    super.init(nibName: nil, bundle: nil)
+  }
   
   private var viewControllers: [UIViewController] = []
   private let titles: [String] = MainFollowList.allCases.map { $0.rawValue }

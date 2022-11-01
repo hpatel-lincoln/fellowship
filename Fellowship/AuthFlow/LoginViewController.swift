@@ -11,11 +11,26 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController {
   
-  var didCompleteLogin: (() -> Void)?
+  private let userSession: UserSession
+  private let oauthClient: OAuthClient
+  private let userService: UserService
   
-  private let userSession = UserSession.shared
-  private lazy var oauthClient = makeTwitterOAuthClient()
-  private lazy var userService = makeUserService()
+  @available(*, unavailable, renamed: "init(coder:userSession:oauthClient:userService:)")
+  required init?(coder: NSCoder) {
+    fatalError("Use `init(coder:userSession:oauthClient:userService:)`")
+  }
+  
+  init?(
+    coder: NSCoder, userSession: UserSession,
+    oauthClient: OAuthClient, userService: UserService
+  ) {
+    self.userSession = userSession
+    self.oauthClient = oauthClient
+    self.userService = userService
+    super.init(coder: coder)
+  }
+  
+  var didCompleteLogin: (() -> Void)?
   
   private var loggingIn: Bool = false {
     didSet {
@@ -101,24 +116,5 @@ class LoginViewController: UIViewController {
     }.finally { [weak self] in
       self?.loggingIn = false
     }
-  }
-  
-  private func makeTwitterOAuthClient() -> OAuthClient {
-    let oauthClient = DefaultOAuthClient(
-      authHost: "twitter.com", authPath: "/i/oauth2/authorize",
-      tokenHost: "api.twitter.com", tokenPath: "/2/oauth2/token",
-      clientID: "VzVmR0g0R0xpS1JNZ3k0WWdZYWk6MTpjaQ",
-      redirectURI: "fellowship://oauth",
-      scope: "tweet.read users.read follows.read offline.access"
-    )
-    return oauthClient
-  }
-  
-  private func makeUserService() -> UserService {
-    let authHttpClient = DefaultAuthHttpClient(
-      httpClient: DefaultHttpClient(),
-      userSession: UserSession.shared
-    )
-    return UserService(authHttpClient: authHttpClient)
   }
 }

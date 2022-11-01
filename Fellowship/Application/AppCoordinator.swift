@@ -12,10 +12,16 @@ class AppCoordinator: NavigationCoordinator {
   private(set) var coordinator: Coordinator?
   private(set) var router: Router
   private let userSession: UserSession
+  private let coordinatorFactory: CoordinatorFactory
   
-  init(router: Router) {
+  init(
+    router: Router,
+    userSession: UserSession,
+    coordinatorFactory: CoordinatorFactory
+  ) {
     self.router = router
-    userSession = UserSession.shared
+    self.userSession = userSession
+    self.coordinatorFactory = coordinatorFactory
   }
   
   func start(with link: DeepLink?) {
@@ -24,21 +30,21 @@ class AppCoordinator: NavigationCoordinator {
     } else {
       if userSession.isLoggedIn {
         startMainFlow(with: link)
-        self.hasStarted = true
       } else {
         startAuthFlow(with: link)
-        self.hasStarted = true
       }
+      self.hasStarted = true
     }
   }
   
   private func startMainFlow(with link: DeepLink?) {
-    let mainViewController = MainViewController()
-    router.setRootController(mainViewController, hideBar: true)
+    let mainCoordinator = coordinatorFactory.makeMainCoordinator(with: router)
+    coordinator = mainCoordinator
+    coordinator?.start(with: link)
   }
   
   private func startAuthFlow(with link: DeepLink?) {
-    let authCoordinator = AuthCoordinator(router: router)
+    let authCoordinator = coordinatorFactory.makeAuthCoordinator(with: router)
     authCoordinator.didCompleteFlow = { [unowned self] in
       coordinator = nil
       startMainFlow(with: link)

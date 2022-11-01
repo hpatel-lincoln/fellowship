@@ -18,8 +18,7 @@
 		391085D1290C6C9800779F89 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D0290C6C9800779F89 /* DeepLink.swift */; };
 		391085D3290C6ED900779F89 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D2290C6ED900779F89 /* AppCoordinator.swift */; };
 		391085D6290C75E300779F89 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D5290C75E300779F89 /* AuthCoordinator.swift */; };
-		391085D8290C775800779F89 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D7290C775800779F89 /* UIViewController+Extensions.swift */; };
-		391085DA290C77F900779F89 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D9290C77F900779F89 /* Storyboards.swift */; };
+		391085DA290C77F900779F89 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085D9290C77F900779F89 /* Storyboard.swift */; };
 		391085DC290C787000779F89 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 391085DB290C787000779F89 /* Auth.storyboard */; };
 		391085E3290CA02600779F89 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085E2290CA02600779F89 /* MainViewController.swift */; };
 		391085E5290CA18E00779F89 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085E4290CA18E00779F89 /* UIColor+Extensions.swift */; };
@@ -39,6 +38,14 @@
 		3981F9C3290DEB07003611D8 /* OAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9C0290DEB07003611D8 /* OAuthError.swift */; };
 		3981F9C4290DEB07003611D8 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9C1290DEB07003611D8 /* OAuthToken.swift */; };
 		3981F9C5290DEB07003611D8 /* OAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9C2290DEB07003611D8 /* OAuthClient.swift */; };
+		3981F9CF291070C7003611D8 /* UIStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9CE291070C7003611D8 /* UIStoryboard+Extensions.swift */; };
+		3981F9D1291075BD003611D8 /* DefaultOAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9D0291075BD003611D8 /* DefaultOAuthClient.swift */; };
+		3981F9D4291076A4003611D8 /* DefaultUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9D3291076A4003611D8 /* DefaultUserService.swift */; };
+		3981F9D629107857003611D8 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9D529107857003611D8 /* MainCoordinator.swift */; };
+		3981F9D929107B9D003611D8 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9D829107B9D003611D8 /* ViewControllerFactory.swift */; };
+		3981F9DD29108544003611D8 /* AuthFlowViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9DC29108544003611D8 /* AuthFlowViewControllerFactory.swift */; };
+		3981F9DF2910857B003611D8 /* MainFlowViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9DE2910857B003611D8 /* MainFlowViewControllerFactory.swift */; };
+		3981F9E1291172AA003611D8 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3981F9E0291172AA003611D8 /* CoordinatorFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,8 +59,7 @@
 		391085D0290C6C9800779F89 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		391085D2290C6ED900779F89 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		391085D5290C75E300779F89 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
-		391085D7290C775800779F89 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
-		391085D9290C77F900779F89 /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
+		391085D9290C77F900779F89 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		391085DB290C787000779F89 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		391085E2290CA02600779F89 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		391085E4290CA18E00779F89 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -75,6 +81,14 @@
 		3981F9C0290DEB07003611D8 /* OAuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthError.swift; sourceTree = "<group>"; };
 		3981F9C1290DEB07003611D8 /* OAuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthToken.swift; sourceTree = "<group>"; };
 		3981F9C2290DEB07003611D8 /* OAuthClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthClient.swift; sourceTree = "<group>"; };
+		3981F9CE291070C7003611D8 /* UIStoryboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extensions.swift"; sourceTree = "<group>"; };
+		3981F9D0291075BD003611D8 /* DefaultOAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOAuthClient.swift; sourceTree = "<group>"; };
+		3981F9D3291076A4003611D8 /* DefaultUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserService.swift; sourceTree = "<group>"; };
+		3981F9D529107857003611D8 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		3981F9D829107B9D003611D8 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		3981F9DC29108544003611D8 /* AuthFlowViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlowViewControllerFactory.swift; sourceTree = "<group>"; };
+		3981F9DE2910857B003611D8 /* MainFlowViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowViewControllerFactory.swift; sourceTree = "<group>"; };
+		3981F9E0291172AA003611D8 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		5939201146305C1E37AD7A3C /* Pods-Fellowship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.release.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.release.xcconfig"; sourceTree = "<group>"; };
 		BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fellowship.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D11F0CB6E08B47F656106A /* Pods-Fellowship.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.debug.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				391085C2290C1F6300779F89 /* UserService.swift */,
+				3981F9D3291076A4003611D8 /* DefaultUserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -153,7 +168,7 @@
 				391085DB290C787000779F89 /* Auth.storyboard */,
 				3981F9BC290DDF7A003611D8 /* Main.storyboard */,
 				3981F9BB290DDF7A003611D8 /* LaunchScreen.storyboard */,
-				391085D9290C77F900779F89 /* Storyboards.swift */,
+				391085D9290C77F900779F89 /* Storyboard.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -161,7 +176,7 @@
 		391085DF290C8B3200779F89 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				391085D7290C775800779F89 /* UIViewController+Extensions.swift */,
+				3981F9CE291070C7003611D8 /* UIStoryboard+Extensions.swift */,
 				391085E4290CA18E00779F89 /* UIColor+Extensions.swift */,
 				3981F9B6290DCF5E003611D8 /* URL+Extensions.swift */,
 				3981F9B8290DD38C003611D8 /* Data+Extensions.swift */,
@@ -181,6 +196,7 @@
 		391085E1290C90AB00779F89 /* MainFlow */ = {
 			isa = PBXGroup;
 			children = (
+				3981F9D529107857003611D8 /* MainCoordinator.swift */,
 				391085E2290CA02600779F89 /* MainViewController.swift */,
 				391085E6290CA2B900779F89 /* PageControl.swift */,
 			);
@@ -196,6 +212,7 @@
 				3981F9BF290DEB07003611D8 /* OAuth */,
 				391085BE290C1E2500779F89 /* Model */,
 				391085C1290C1F4300779F89 /* Services */,
+				3981F9D729107B42003611D8 /* Factories */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -259,8 +276,20 @@
 				3981F9C0290DEB07003611D8 /* OAuthError.swift */,
 				3981F9C1290DEB07003611D8 /* OAuthToken.swift */,
 				3981F9C2290DEB07003611D8 /* OAuthClient.swift */,
+				3981F9D0291075BD003611D8 /* DefaultOAuthClient.swift */,
 			);
 			path = OAuth;
+			sourceTree = "<group>";
+		};
+		3981F9D729107B42003611D8 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				3981F9E0291172AA003611D8 /* CoordinatorFactory.swift */,
+				3981F9D829107B9D003611D8 /* ViewControllerFactory.swift */,
+				3981F9DC29108544003611D8 /* AuthFlowViewControllerFactory.swift */,
+				3981F9DE2910857B003611D8 /* MainFlowViewControllerFactory.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		56AB4BB8D6D022B1A29360A1 /* Frameworks */ = {
@@ -384,25 +413,32 @@
 				3981F9C4290DEB07003611D8 /* OAuthToken.swift in Sources */,
 				391085CA290C30A200779F89 /* DefaultAuthHttpClient.swift in Sources */,
 				39565233290B0C610089D3BC /* DefaultHttpClient.swift in Sources */,
+				3981F9CF291070C7003611D8 /* UIStoryboard+Extensions.swift in Sources */,
 				39565235290B0C9C0089D3BC /* NetworkError.swift in Sources */,
 				3981F9C3290DEB07003611D8 /* OAuthError.swift in Sources */,
+				3981F9D4291076A4003611D8 /* DefaultUserService.swift in Sources */,
 				39565231290B0BFC0089D3BC /* HttpClient.swift in Sources */,
 				3981F9C5290DEB07003611D8 /* OAuthClient.swift in Sources */,
 				397E7038290B053800DB0442 /* LoginViewController.swift in Sources */,
+				3981F9D629107857003611D8 /* MainCoordinator.swift in Sources */,
 				3956522F290B0B600089D3BC /* HttpRequest.swift in Sources */,
-				391085D8290C775800779F89 /* UIViewController+Extensions.swift in Sources */,
+				3981F9E1291172AA003611D8 /* CoordinatorFactory.swift in Sources */,
 				3981F9B9290DD38C003611D8 /* Data+Extensions.swift in Sources */,
 				391085D6290C75E300779F89 /* AuthCoordinator.swift in Sources */,
-				391085DA290C77F900779F89 /* Storyboards.swift in Sources */,
+				391085DA290C77F900779F89 /* Storyboard.swift in Sources */,
+				3981F9D1291075BD003611D8 /* DefaultOAuthClient.swift in Sources */,
 				391085CF290C6C3100779F89 /* Router.swift in Sources */,
+				3981F9D929107B9D003611D8 /* ViewControllerFactory.swift in Sources */,
 				397E7034290B053800DB0442 /* AppDelegate.swift in Sources */,
 				391085C3290C1F6300779F89 /* UserService.swift in Sources */,
 				3981F9B7290DCF5E003611D8 /* URL+Extensions.swift in Sources */,
+				3981F9DD29108544003611D8 /* AuthFlowViewControllerFactory.swift in Sources */,
 				397E7036290B053800DB0442 /* SceneDelegate.swift in Sources */,
 				391085E5290CA18E00779F89 /* UIColor+Extensions.swift in Sources */,
 				391085E7290CA2B900779F89 /* PageControl.swift in Sources */,
 				391085D3290C6ED900779F89 /* AppCoordinator.swift in Sources */,
 				391085D1290C6C9800779F89 /* DeepLink.swift in Sources */,
+				3981F9DF2910857B003611D8 /* MainFlowViewControllerFactory.swift in Sources */,
 				391085C5290C2A1400779F89 /* UserSession.swift in Sources */,
 				391085C0290C1E4000779F89 /* User.swift in Sources */,
 			);

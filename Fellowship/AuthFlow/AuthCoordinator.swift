@@ -8,14 +8,20 @@
 import Foundation
 
 class AuthCoordinator: NavigationCoordinator {
-  private(set) var hasStarted: Bool = false
-  private(set) var coordinator: Coordinator?
-  private(set) var router: Router
   
   var didCompleteFlow: (() -> Void)?
   
-  init(router: Router) {
+  private(set) var hasStarted: Bool = false
+  private(set) var coordinator: Coordinator?
+  private(set) var router: Router
+  private let factory: AuthFlowViewControllerFactory
+  
+  init(
+    router: Router,
+    factory: AuthFlowViewControllerFactory
+  ) {
     self.router = router
+    self.factory = factory
   }
   
   func start(with link: DeepLink?) {
@@ -26,7 +32,7 @@ class AuthCoordinator: NavigationCoordinator {
   }
   
   private func showLogin() {
-    let loginViewController = LoginViewController.controllerFromStoryboard(.auth)
+    let loginViewController = factory.makeLoginViewController()
     loginViewController.didCompleteLogin = didCompleteFlow
     router.setRootController(loginViewController)
   }
