@@ -9,10 +9,6 @@ import Foundation
 
 class UserSession {
   
-  // Singleton
-  static let shared = UserSession()
-  private init() { }
-  
   private var authToken: OAuthToken?
   private var user: User?
   

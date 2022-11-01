@@ -8,7 +8,7 @@
 import Foundation
 
 class CoordinatorFactory {
-  private let userSession = UserSession.shared
+  private let userSession = UserSession()
   private let httpClient = DefaultHttpClient()
   private lazy var oauthClient = makeTwitterOAuthClient()
   private lazy var authHttpClient = makeAuthHttpClient()
