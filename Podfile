@@ -7,4 +7,5 @@ target 'Fellowship' do
 
   # Pods for Fellowship
   pod "PromiseKit"
+  pod "SwiftKeychainWrapper"
 end
