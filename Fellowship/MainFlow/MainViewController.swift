@@ -8,7 +8,7 @@
 import UIKit
 import PromiseKit
 
-enum MainFollowList: String, CaseIterable {
+enum FollowList: String, CaseIterable {
   case following = "Following"
   case followers = "Followers"
 }
@@ -19,25 +19,27 @@ class MainViewController: UIViewController {
     static let StandardMargin: CGFloat = 8
     static let ProfileImageViewHeight: CGFloat = 80
     static let PageControlHeight: CGFloat = 40
-    static let UnderlineHeight: CGFloat = 2
+    static let UnderlineHeight: CGFloat = 3
   }
   
   private let userSession: UserSession
   private let httpClient: HttpClient
+  private let factory: MainFlowViewControllerFactory
   
   @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("This class does not support NSCoder")
   }
   
-  init(userSession: UserSession, httpClient: HttpClient) {
+  init(userSession: UserSession, httpClient: HttpClient, factory: MainFlowViewControllerFactory) {
     self.userSession = userSession
     self.httpClient = httpClient
+    self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }
   
-  private var viewControllers: [UIViewController] = []
-  private let titles: [String] = MainFollowList.allCases.map { $0.rawValue }
+  private var viewControllers: [FollowListViewController] = []
+  private let titles: [String] = FollowList.allCases.map { $0.rawValue }
   private var maxHeadingTopOffset: CGFloat {
     headingView.bounds.height - Constants.PageControlHeight
   }
@@ -53,14 +55,17 @@ class MainViewController: UIViewController {
   private var scrollView: UIScrollView!
   private var stackView: UIStackView!
   
+  private var shouldUpdateLayout = true
+  private var checkScrollPosition: Bool = false
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     view.backgroundColor = .systemBackground
+    
     setupHeadingView()
     setupPageControl()
     setupScrollView()
-    addChildViewControllers()
+    setupPlaceholderView()
     
     nameLabel.font = .preferredFont(forTextStyle: .headline)
     nameLabel.text = userSession.currentUser?.name
@@ -68,13 +73,29 @@ class MainViewController: UIViewController {
     usernameLabel.font = .preferredFont(forTextStyle: .caption1)
     usernameLabel.text = userSession.currentUser?.username
     
-    loadProfileImage()
+    if let imageURL = userSession.currentUser?.profileImageURL {
+      loadProfileImage(at: imageURL)
+    }
+    
+    if let userID = userSession.currentUser?.id {
+      addFollowListViewControllers(for: userID)
+    }
   }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    profileImageView.layer.cornerRadius = profileImageView.bounds.height/2
-    profileImageView.clipsToBounds = true
+    updateProfileImageViewLayout()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    if shouldUpdateLayout {
+      addBottomBorder(to: headingView)
+      for viewController in viewControllers {
+        viewController.insetTop = maxHeadingTopOffset
+      }
+      shouldUpdateLayout = false
+    }
   }
   
   private func setupHeadingView() {
@@ -126,7 +147,7 @@ class MainViewController: UIViewController {
     let options = PageControlOptions(underlineHeight: Constants.UnderlineHeight,
                                      underlineColor: view.tintColor,
                                      titleFont: UIFont.preferredFont(forTextStyle: .headline),
-                                     titleColor: nil,
+                                     titleColor: UIColor.label,
                                      titles: titles)
     
     pageControl = PageControl(frame: .zero, options: options)
@@ -180,9 +201,23 @@ class MainViewController: UIViewController {
     NSLayoutConstraint.activate(stackViewCon)
   }
   
-  private func addChildViewControllers() {
-    for list in MainFollowList.allCases {
-      let viewController = createViewController(withList: list)
+  private func setupPlaceholderView() {
+    let placeholderView = UIView()
+    placeholderView.backgroundColor = .systemBackground
+    view.addSubview(placeholderView)
+    placeholderView.translatesAutoresizingMaskIntoConstraints = false
+    let placeholderViewCon = [
+      placeholderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      placeholderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+      placeholderView.topAnchor.constraint(equalTo: view.topAnchor),
+      placeholderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+    ]
+    NSLayoutConstraint.activate(placeholderViewCon)
+  }
+  
+  private func addFollowListViewControllers(for userID: String) {
+    for list in FollowList.allCases {
+      let viewController = createViewController(withList: list, for: userID)
       viewControllers.append(viewController)
       
       addChild(viewController)
@@ -196,9 +231,11 @@ class MainViewController: UIViewController {
     }
   }
   
-  private func createViewController(withList list: MainFollowList) -> UIViewController {
-    let viewController = UIViewController()
-    viewController.view.backgroundColor = .systemBackground
+  private func createViewController(withList list: FollowList, for userID: String) -> FollowListViewController {
+    let viewController = factory.makeFollowListViewController(
+      userID: userID, followList: list
+    )
+    viewController.delegate = self
     return viewController
   }
   
@@ -210,15 +247,9 @@ class MainViewController: UIViewController {
     scrollView.contentOffset.x = offsetX
   }
   
-  private func loadProfileImage() {
+  private func loadProfileImage(at imageURL: URL) {
     profileImageView.image = UIImage(systemName: "person.circle")
-    guard
-      let profileImageURL = userSession.currentUser?.profileImageURL
-    else {
-      return
-    }
-    
-    let request = URLRequest(url: profileImageURL)
+    let request = URLRequest(url: imageURL)
     firstly {
       httpClient.perform(request: request)
     }.done { [weak self] data in
@@ -232,6 +263,21 @@ class MainViewController: UIViewController {
     }.catch { error in
       print(error)
     }
+  }
+  
+  private func updateProfileImageViewLayout() {
+    profileImageView.layer.cornerRadius = profileImageView.bounds.height/2
+    profileImageView.clipsToBounds = true
+  }
+  
+  private func addBottomBorder(to view: UIView) {
+    let border = CALayer()
+    border.frame = CGRect(x: view.bounds.minX,
+                          y: view.bounds.maxY,
+                          width: view.bounds.width,
+                          height: 0.5)
+    border.backgroundColor = UIColor.systemGray2.cgColor
+    view.layer.addSublayer(border)
   }
 }
 
@@ -250,5 +296,49 @@ extension MainViewController: UIScrollViewDelegate {
 
     pageControl.currentIndex = currentIndex
     pageControl.userDidScroll(toPercent: percent)
+  }
+}
+
+extension MainViewController: FollowListViewControllerDelegate {
+  
+  func didScroll(_ scrollView: UIScrollView) {
+    let offsetY = scrollView.contentOffset.y
+    var trueOffsetY = scrollView.contentInset.top + offsetY
+    trueOffsetY = max(0, min(maxHeadingTopOffset, trueOffsetY))
+    headingViewTop.constant = -trueOffsetY
+    if trueOffsetY < maxHeadingTopOffset {
+      checkScrollPosition = true
+      let offset = CGPoint(x: 0, y: offsetY)
+      adjustContentOffset(offset)
+    }
+  }
+  
+  func didEndDragging(_ scrollView: UIScrollView) {
+    guard checkScrollPosition == true else { return }
+    let offsetY = scrollView.contentOffset.y
+    let trueOffsetY = scrollView.contentInset.top + offsetY
+    if trueOffsetY >= maxHeadingTopOffset {
+      checkScrollPosition = false
+      let offset = CGPoint(x: 0, y: 0)
+      adjustContentOffset(offset)
+    }
+  }
+  
+  func didEndDecelerating(_ scrollView: UIScrollView) {
+    guard checkScrollPosition == true else { return }
+    let offsetY = scrollView.contentOffset.y
+    let trueOffsetY = scrollView.contentInset.top + offsetY
+    if trueOffsetY >= maxHeadingTopOffset {
+      checkScrollPosition = false
+      let offset = CGPoint(x: 0, y: 0)
+      adjustContentOffset(offset)
+    }
+  }
+  
+  private func adjustContentOffset(_ contentOffset: CGPoint) {
+    for (index, viewController) in viewControllers.enumerated() {
+      if index == pageControl.currentIndex { continue }
+      viewController.adjustContentOffset(contentOffset)
+    }
   }
 }
