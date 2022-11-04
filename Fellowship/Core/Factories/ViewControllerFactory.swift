@@ -51,9 +51,19 @@ extension ViewControllerFactory: MainFlowViewControllerFactory {
     let mainViewController = MainViewController(
       userSession: userSession,
       httpClient: httpClient,
-      followSearchService: makeFollowSearchService()
+      factory: self
     )
     return mainViewController
+  }
+  
+  func makeFollowListViewController(
+    userID: String, followList: FollowList
+  ) -> FollowListViewController {
+    let followListViewController = FollowListViewController(
+      followSearchService: makeFollowSearchService(),
+      userID: userID, followList: followList
+    )
+    return followListViewController
   }
 }
 

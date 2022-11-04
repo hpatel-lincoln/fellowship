@@ -33,6 +33,6 @@ class MainCoordinator: NavigationCoordinator {
   
   private func showMain() {
     let mainViewController = factory.makeMainViewController()
-    router.setRootController(mainViewController)
+    router.setRootController(mainViewController, hideBar: true)
   }
 }

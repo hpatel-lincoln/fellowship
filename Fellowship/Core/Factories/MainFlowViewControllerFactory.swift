@@ -11,4 +11,9 @@ protocol MainFlowViewControllerFactory {
   
   ///  Return an instance of MainViewController
   func makeMainViewController() -> MainViewController
+  
+  /// Return an instance of FollowListViewController
+  func makeFollowListViewController(
+    userID: String, followList: FollowList
+  ) -> FollowListViewController
 }
