@@ -71,6 +71,7 @@ class FollowListViewController: UIViewController {
     NSLayoutConstraint.activate(tableViewCon)
     
     tableView.backgroundColor = .clear
+    tableView.showsVerticalScrollIndicator = false
     
     tableView.register(
       UITableViewCell.self,
@@ -79,7 +80,6 @@ class FollowListViewController: UIViewController {
     
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 100
-    tableView.separatorStyle = .none
     
     tableView.delegate = self
     tableView.dataSource = self

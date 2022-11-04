@@ -34,6 +34,6 @@ class AuthCoordinator: NavigationCoordinator {
   private func showLogin() {
     let loginViewController = factory.makeLoginViewController()
     loginViewController.didCompleteLogin = didCompleteFlow
-    router.setRootController(loginViewController)
+    router.setRootController(loginViewController, hideBar: true)
   }
 }

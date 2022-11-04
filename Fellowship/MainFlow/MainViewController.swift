@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
     static let StandardMargin: CGFloat = 8
     static let ProfileImageViewHeight: CGFloat = 80
     static let PageControlHeight: CGFloat = 40
-    static let UnderlineHeight: CGFloat = 2
+    static let UnderlineHeight: CGFloat = 3
   }
   
   private let userSession: UserSession
@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
   private var scrollView: UIScrollView!
   private var stackView: UIStackView!
   
-  private var shouldSetInset = true
+  private var shouldUpdateLayout = true
   private var checkScrollPosition: Bool = false
   
   override func viewDidLoad() {
@@ -83,17 +83,17 @@ class MainViewController: UIViewController {
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    profileImageView.layer.cornerRadius = profileImageView.bounds.height/2
-    profileImageView.clipsToBounds = true
+    updateProfileImageViewLayout()
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    if shouldSetInset {
+    if shouldUpdateLayout {
+      addBottomBorder(to: headingView)
       for viewController in viewControllers {
         viewController.insetTop = maxHeadingTopOffset
       }
-      shouldSetInset = false
+      shouldUpdateLayout = false
     }
   }
   
@@ -146,7 +146,7 @@ class MainViewController: UIViewController {
     let options = PageControlOptions(underlineHeight: Constants.UnderlineHeight,
                                      underlineColor: view.tintColor,
                                      titleFont: UIFont.preferredFont(forTextStyle: .headline),
-                                     titleColor: nil,
+                                     titleColor: UIColor.label,
                                      titles: titles)
     
     pageControl = PageControl(frame: .zero, options: options)
@@ -248,6 +248,21 @@ class MainViewController: UIViewController {
     }.catch { error in
       print(error)
     }
+  }
+  
+  private func updateProfileImageViewLayout() {
+    profileImageView.layer.cornerRadius = profileImageView.bounds.height/2
+    profileImageView.clipsToBounds = true
+  }
+  
+  private func addBottomBorder(to view: UIView) {
+    let border = CALayer()
+    border.frame = CGRect(x: view.bounds.minX,
+                          y: view.bounds.maxY,
+                          width: view.bounds.width,
+                          height: 0.5)
+    border.backgroundColor = UIColor.systemGray2.cgColor
+    view.layer.addSublayer(border)
   }
 }
 
