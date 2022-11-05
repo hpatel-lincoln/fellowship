@@ -54,4 +54,16 @@ struct User: Codable {
     
     self.followMetrics = try container.decodeIfPresent(FollowMetrics.self, forKey: .followMetrics)
   }
+  
+  func encode(to encoder: Encoder) throws {
+    var parentContainer = encoder.container(keyedBy: ParentCodingKeys.self)
+    
+    
+    var container = parentContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .data)
+    try container.encode(self.id, forKey: .id)
+    try container.encode(self.name, forKey: .name)
+    try container.encode(self.username, forKey: .username)
+    try container.encodeIfPresent(self.profileImageURL, forKey: .profileImageURL)
+    try container.encodeIfPresent(self.followMetrics, forKey: .followMetrics)
+  }
 }

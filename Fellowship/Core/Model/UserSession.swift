@@ -6,24 +6,36 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class UserSession {
   
-  private var authToken: OAuthToken?
-  private var user: User?
+  private struct Constants {
+    static let UserKey = "com.example.fellowship.user"
+    static let RefreshTokenKey = "com.example.fellowship.refreshtoken"
+    static let QueueLabel = "com.example.fellowship.usersession"
+  }
   
-  private let queue = DispatchQueue(label: "com.example.Fellowship.UserSession",
-                                    attributes: .concurrent)
+  private var authToken: OAuthToken?
+  
+  private(set) var currentUser: User? {
+    get { loadUser() }
+    set { saveUser(newValue) }
+  }
+  
+  private let queue = DispatchQueue(label: Constants.QueueLabel, attributes: .concurrent)
+  
+  private let storage: UserDefaults
+  private let keychain: KeychainWrapper
+  
+  init(storage: UserDefaults, keychain: KeychainWrapper) {
+    self.storage = storage
+    self.keychain = keychain
+  }
   
   var isLoggedIn: Bool {
     queue.sync {
-      return user != nil
-    }
-  }
-  
-  var currentUser: User? {
-    queue.sync {
-      return user
+      return currentUser != nil
     }
   }
   
@@ -40,28 +52,51 @@ class UserSession {
   }
   
   var refreshToken: String? {
-    queue.sync {
-      return authToken?.refreshToken
+    queue.sync {      
+      if let refreshToken = authToken?.refreshToken {
+        return refreshToken
+      } else if let refreshToken = keychain.string(forKey: Constants.RefreshTokenKey) {
+        return refreshToken
+      } else {
+        return nil
+      }
     }
   }
   
   func setToken(_ token: OAuthToken) {
     queue.async(flags: .barrier) {
       self.authToken = token
+      self.keychain.set(token.refreshToken, forKey: Constants.RefreshTokenKey)
     }
   }
   
   func loginUser(_ user: User) {
     guard authToken != nil else { return }
     queue.async(flags: .barrier) {
-      self.user = user
+      self.currentUser = user
     }
   }
   
   func logout() {
     queue.async(flags: .barrier) {
-      self.user = nil
+      self.currentUser = nil
       self.authToken = nil
+      self.keychain.removeObject(forKey: Constants.RefreshTokenKey)
     }
+  }
+  
+  private func loadUser() -> User? {
+    guard
+      let userData = storage.object(forKey: Constants.UserKey) as? Data,
+      let user = try? JSONDecoder().decode(User.self, from: userData)
+    else {
+      return nil
+    }
+    return user
+  }
+  
+  private func saveUser(_ user: User?) {
+    let userData = try? JSONEncoder().encode(user)
+    storage.setValue(userData, forKey: Constants.UserKey)
   }
 }
