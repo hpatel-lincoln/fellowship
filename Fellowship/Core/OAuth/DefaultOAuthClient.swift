@@ -19,6 +19,7 @@ class DefaultOAuthClient: NSObject, OAuthClient {
     static let CodeChallengeMethod = "S256"
     static let StateKey = "state"
     static let AuthCodeGrantType = "authorization_code"
+    static let RefreshTokenGrantType = "refresh_token"
   }
   
   private let authHost: String
@@ -56,6 +57,36 @@ class DefaultOAuthClient: NSObject, OAuthClient {
       self.authorize(at: authURL)
     }.then { code in
       self.authenticate(withCode: code)
+    }
+  }
+  
+  func refresh(with token: String) -> Promise<OAuthToken> {
+    let parameters = [
+      "refresh_token": token,
+      "grant_type": Constants.RefreshTokenGrantType,
+      "client_id": clientID
+    ]
+    
+    do {
+      let encoder = JSONEncoder()
+      let httpBody = try encoder.encode(parameters)
+      
+      let request = HttpRequest(
+        host: tokenHost,
+        path: tokenPath,
+        method: .post,
+        httpBody: httpBody
+      )
+      
+      return firstly {
+        httpClient.perform(request: request)
+      }.then { tokenData -> Promise<OAuthToken> in
+        let decoder = JSONDecoder()
+        let tokenResponse = try decoder.decode(OAuthToken.self, from: tokenData)
+        return Promise.value(tokenResponse)
+      }
+    } catch {
+      return Promise(error: error)
     }
   }
   

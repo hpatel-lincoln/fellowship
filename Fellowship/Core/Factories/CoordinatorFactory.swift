@@ -60,7 +60,8 @@ extension CoordinatorFactory {
   private func makeAuthHttpClient() -> AuthHttpClient {
     let authHttpClient = DefaultAuthHttpClient(
       httpClient: httpClient,
-      userSession: userSession
+      userSession: userSession,
+      oauthClient: oauthClient
     )
     return authHttpClient
   }

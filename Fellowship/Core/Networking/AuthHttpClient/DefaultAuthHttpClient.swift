@@ -16,20 +16,45 @@ class DefaultAuthHttpClient: AuthHttpClient {
   
   private let httpClient: HttpClient
   private let userSession: UserSession
+  private let oauthClient: OAuthClient
   
   init(
     httpClient: HttpClient,
-    userSession: UserSession
+    userSession: UserSession,
+    oauthClient: OAuthClient
   ) {
     self.httpClient = httpClient
     self.userSession = userSession
+    self.oauthClient = oauthClient
   }
   
   func perform(request: HttpRequest, withRetries retryCount: Int) -> Promise<Data> {
-    firstly {
+    var authRequest: HttpRequest = request
+    
+    return firstly {
       injectAccessToken(forRequest: request)
-    }.then { request in
-      self.httpClient.perform(request: request)
+    }.then { request -> Promise<Data> in
+      authRequest = request
+      return self.httpClient.perform(request: request)
+    }.recover { error -> Promise<Data> in
+      guard retryCount > 0 else {
+        throw error
+      }
+      
+      guard let refreshToken = self.userSession.refreshToken else {
+        throw NetworkError.unauthorized
+      }
+      
+      if case NetworkError.unauthorized = error {
+        return firstly {
+          self.oauthClient.refresh(with: refreshToken)
+        }.then { authToken -> Promise<Data> in
+          self.userSession.setToken(authToken)
+          return self.perform(request: authRequest, withRetries: retryCount-1)
+        }
+      } else {
+        throw error
+      }
     }
   }
   
