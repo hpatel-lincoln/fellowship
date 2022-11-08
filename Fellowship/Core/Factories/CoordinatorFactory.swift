@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftKeychainWrapper
+import KeychainSwift
 
 class CoordinatorFactory {
   private let httpClient = DefaultHttpClient()
@@ -42,7 +42,7 @@ extension CoordinatorFactory {
   private func makeUserSession() -> UserSession {
     return UserSession(
       storage: UserDefaults.standard,
-      keychain: KeychainWrapper.standard
+      keychain: KeychainSwift()
     )
   }
   
