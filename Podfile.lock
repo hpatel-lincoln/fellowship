@@ -8,17 +8,21 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.18.1):
     - PromiseKit/CorePromise
+  - SwiftKeychainWrapper (4.0.1)
 
 DEPENDENCIES:
   - PromiseKit
+  - SwiftKeychainWrapper
 
 SPEC REPOS:
   trunk:
     - PromiseKit
+    - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
   PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
+  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 98445b8bf9af85318b08c4871cba48899ea6f899
+PODFILE CHECKSUM: 6b880217f7a0d08577863d6509ab891f7016db78
 
 COCOAPODS: 1.11.3

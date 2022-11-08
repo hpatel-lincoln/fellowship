@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class CoordinatorFactory {
-  private let userSession = UserSession()
   private let httpClient = DefaultHttpClient()
+  private lazy var userSession = makeUserSession()
   private lazy var oauthClient = makeTwitterOAuthClient()
   private lazy var authHttpClient = makeAuthHttpClient()
   private lazy var factory = makeViewControllerFactory()
@@ -38,6 +39,13 @@ extension CoordinatorFactory {
 
 extension CoordinatorFactory {
   
+  private func makeUserSession() -> UserSession {
+    return UserSession(
+      storage: UserDefaults.standard,
+      keychain: KeychainWrapper.standard
+    )
+  }
+  
   private func makeTwitterOAuthClient() -> OAuthClient {
     let oauthClient = DefaultOAuthClient(
       authHost: "twitter.com", authPath: "/i/oauth2/authorize",
@@ -52,7 +60,8 @@ extension CoordinatorFactory {
   private func makeAuthHttpClient() -> AuthHttpClient {
     let authHttpClient = DefaultAuthHttpClient(
       httpClient: httpClient,
-      userSession: userSession
+      userSession: userSession,
+      oauthClient: oauthClient
     )
     return authHttpClient
   }

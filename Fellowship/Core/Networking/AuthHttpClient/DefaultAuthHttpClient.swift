@@ -10,30 +10,99 @@ import PromiseKit
 
 class DefaultAuthHttpClient: AuthHttpClient {
   
+  private typealias Injected = (authRequest: HttpRequest, injectionDate: Date)
+  
   private struct Constants {
     static let AuthorizationHeaderKey = "Authorization"
+    static let AuthQueueLabel = "com.example.Fellowship.AuthHttpClient"
   }
   
   private let httpClient: HttpClient
   private let userSession: UserSession
+  private let oauthClient: OAuthClient
+  
+  private let authQueue = DispatchQueue(
+    label: Constants.AuthQueueLabel, qos: .background, attributes: .concurrent
+  )
+  private let semaphore = DispatchSemaphore(value: 1)
   
   init(
     httpClient: HttpClient,
-    userSession: UserSession
+    userSession: UserSession,
+    oauthClient: OAuthClient
   ) {
     self.httpClient = httpClient
     self.userSession = userSession
+    self.oauthClient = oauthClient
   }
   
   func perform(request: HttpRequest, withRetries retryCount: Int) -> Promise<Data> {
-    firstly {
+    var injectionDate = Date.now
+    return firstly {
       injectAccessToken(forRequest: request)
-    }.then { request in
-      self.httpClient.perform(request: request)
+    }.then { [unowned self] injected -> Promise<Data> in
+      injectionDate = injected.injectionDate
+      return httpClient.perform(request: injected.authRequest)
+    }.recover(on: authQueue) { [unowned self] error -> Promise<Data> in
+      // IMPORTANT!
+      // Critical section code must not run on the main or a serial queue.
+      // This will avoid deadlocks. As we are using a concurrent queue which
+      // can utilize multiple threads, it's best to avoid using NSLock as locking
+      // and unlocking from different threads can cause unexpected bahaviour.
+      
+      // Retry count must be more than 0 and response status code
+      // must be 401 in order to proceed refreshing token.
+      guard
+        retryCount > 0,
+        case NetworkError.unauthorized = error
+      else {
+        throw error
+      }
+      
+      // Entering critical section
+      semaphore.wait()
+      
+      // If access token issue date is more recent than the date when
+      // access token was injected for the request, a new token must be
+      // available. We should retry without having to refresh token.
+      if
+        let issueDate = self.userSession.issueDate,
+        issueDate.timeIntervalSince(injectionDate) >= 0
+      {
+        semaphore.signal()
+        return perform(request: request, withRetries: retryCount-1)
+      }
+      
+      // If refresh token isn't availabe from the keychain,
+      // throw unauthorized error.
+      guard let refreshToken = userSession.refreshToken else {
+        semaphore.signal()
+        throw NetworkError.unauthorized
+      }
+      
+      // Start refresh token process
+      return firstly {
+        oauthClient.refresh(with: refreshToken)
+      }.then(on: authQueue) { [unowned self] authToken -> Promise<Data> in
+        // Set tokens in UserSession and retry
+        userSession.setToken(authToken)
+        semaphore.signal()
+        return perform(request: request, withRetries: retryCount-1)
+      }.recover(on: authQueue) { [unowned self] error -> Promise<Data> in
+        // Sadly, Twitter returns 400 in-case the refresh token is invalid.
+        // Map status code 400 to unauthorized error.
+        semaphore.signal()
+        switch error {
+        case let NetworkError.badRequest(code) where code == 400:
+          throw NetworkError.unauthorized
+        default:
+          throw error
+        }
+      }
     }
   }
   
-  private func injectAccessToken(forRequest request: HttpRequest) -> Promise<HttpRequest> {
+  private func injectAccessToken(forRequest request: HttpRequest) -> Promise<Injected> {
     return Promise { seal in
       guard
         let accessToken = userSession.accessToken,
@@ -45,7 +114,9 @@ class DefaultAuthHttpClient: AuthHttpClient {
       var headers = authRequest.headers ?? [:]
       headers[Constants.AuthorizationHeaderKey] = "\(tokenType) \(accessToken)"
       authRequest.headers = headers
-      return seal.fulfill(authRequest)
+      let injectionDate = Date.now
+      let injected = (authRequest, injectionDate)
+      return seal.fulfill(injected)
     }
   }
 }
