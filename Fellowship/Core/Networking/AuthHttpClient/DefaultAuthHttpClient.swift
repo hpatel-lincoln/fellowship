@@ -46,6 +46,8 @@ class DefaultAuthHttpClient: AuthHttpClient {
       injectionDate = injected.injectionDate
       return httpClient.perform(request: injected.authRequest)
     }.recover(on: authQueue) { [unowned self] error -> Promise<Data> in
+      // Retry count must be more than 0 and response status code
+      // must be 401 in order to proceed refreshing token.
       guard
         retryCount > 0,
         case NetworkError.unauthorized = error
@@ -53,7 +55,12 @@ class DefaultAuthHttpClient: AuthHttpClient {
         throw error
       }
       
+      //
       lock.lock()
+      
+      // If access token issue date is more recent than the date when
+      // access token was injected for the request, a new token must be
+      // available. We should retry without having to refresh token.
       if
         let issueDate = self.userSession.issueDate,
         issueDate.timeIntervalSince(injectionDate) >= 0
@@ -62,22 +69,29 @@ class DefaultAuthHttpClient: AuthHttpClient {
         return self.perform(request: request, withRetries: retryCount-1)
       }
       
+      // If refresh token isn't availabe from the keychain,
+      // throw unauthorized error.
       guard let refreshToken = self.userSession.refreshToken else {
         lock.unlock()
         throw NetworkError.unauthorized
       }
       
+      // Start refresh token process
       return firstly {
         oauthClient.refresh(with: refreshToken)
       }.then { authToken -> Promise<Data> in
+        // Set tokens in UserSession and retry
         self.userSession.setToken(authToken)
         self.lock.unlock()
         return self.perform(request: request, withRetries: retryCount-1)
       }.recover { error -> Promise<Data> in
+        // Sadly, Twitter returns 400 in-case the refresh token is invalid.
+        // Map status code 400 to unauthorized error.
         self.lock.unlock()
-        if case NetworkError.badRequest(_) = error {
+        switch error {
+        case let NetworkError.badRequest(code) where code == 400:
           throw NetworkError.unauthorized
-        } else {
+        default:
           throw error
         }
       }
