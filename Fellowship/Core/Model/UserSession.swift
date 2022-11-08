@@ -63,6 +63,12 @@ class UserSession {
     }
   }
   
+  var issueDate: Date? {
+    queue.sync {
+      return authToken?.issueDate
+    }
+  }
+  
   func setToken(_ token: OAuthToken) {
     queue.async(flags: .barrier) {
       self.authToken = token
