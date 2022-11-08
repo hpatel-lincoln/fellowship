@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftKeychainWrapper
+import KeychainSwift
 
 class UserSession {
   
@@ -26,9 +26,9 @@ class UserSession {
   private let queue = DispatchQueue(label: Constants.QueueLabel, attributes: .concurrent)
   
   private let storage: UserDefaults
-  private let keychain: KeychainWrapper
+  private let keychain: KeychainSwift
   
-  init(storage: UserDefaults, keychain: KeychainWrapper) {
+  init(storage: UserDefaults, keychain: KeychainSwift) {
     self.storage = storage
     self.keychain = keychain
   }
@@ -55,7 +55,7 @@ class UserSession {
     queue.sync {      
       if let refreshToken = authToken?.refreshToken {
         return refreshToken
-      } else if let refreshToken = keychain.string(forKey: Constants.RefreshTokenKey) {
+      } else if let refreshToken = keychain.get(Constants.RefreshTokenKey) {
         return refreshToken
       } else {
         return nil
@@ -87,7 +87,7 @@ class UserSession {
     queue.async(flags: .barrier) {
       self.currentUser = nil
       self.authToken = nil
-      self.keychain.removeObject(forKey: Constants.RefreshTokenKey)
+      self.keychain.delete(Constants.RefreshTokenKey)
     }
   }
   
