@@ -22,6 +22,8 @@ class MainViewController: UIViewController {
     static let UnderlineHeight: CGFloat = 3
   }
   
+  var didLogout: (() -> Void)?
+  
   private let userSession: UserSession
   private let httpClient: HttpClient
   private let factory: MainFlowViewControllerFactory
@@ -49,6 +51,7 @@ class MainViewController: UIViewController {
   private var profileImageView: UIImageView!
   private var nameLabel: UILabel!
   private var usernameLabel: UILabel!
+  private var logoutButton: UIButton!
   
   private var pageControl: PageControl!
   
@@ -141,6 +144,20 @@ class MainViewController: UIViewController {
       usernameLabel.centerXAnchor.constraint(equalTo: headingView.centerXAnchor)
     ]
     NSLayoutConstraint.activate(usernameLabelCon)
+    
+    var logoutConfiguration = UIButton.Configuration.borderless()
+    logoutConfiguration.title = "Logout"
+    logoutButton = UIButton(configuration: logoutConfiguration)
+    logoutButton.addTarget(self, action: #selector(onLogoutTap(_:)), for: .touchUpInside)
+    headingView.addSubview(logoutButton)
+    logoutButton.translatesAutoresizingMaskIntoConstraints = false
+    let logoutButtonCon = [
+      logoutButton.topAnchor.constraint(equalTo: headingView.topAnchor,
+                                        constant: Constants.StandardMargin),
+      logoutButton.trailingAnchor.constraint(equalTo: headingView.trailingAnchor,
+                                             constant: -Constants.StandardMargin)
+    ]
+    NSLayoutConstraint.activate(logoutButtonCon)
   }
   
   private func setupPageControl() {
@@ -240,6 +257,11 @@ class MainViewController: UIViewController {
   }
   
   @objc
+  private func onLogoutTap(_ sender: UIButton) {
+    didLogout?()
+  }
+  
+  @objc
   private func onCurrentIndexChange() {
     let currentIndex = CGFloat(pageControl.currentIndex)
     let pageWidth = scrollView.bounds.width
@@ -300,6 +322,10 @@ extension MainViewController: UIScrollViewDelegate {
 }
 
 extension MainViewController: FollowListViewControllerDelegate {
+  
+  func didReceiveUnauthorized() {
+    didLogout?()
+  }
   
   func didScroll(_ scrollView: UIScrollView) {
     let offsetY = scrollView.contentOffset.y

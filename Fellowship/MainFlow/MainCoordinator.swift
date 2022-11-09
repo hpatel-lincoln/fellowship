@@ -33,6 +33,7 @@ class MainCoordinator: NavigationCoordinator {
   
   private func showMain() {
     let mainViewController = factory.makeMainViewController()
+    mainViewController.didLogout = didCompleteFlow
     router.setRootController(mainViewController, hideBar: true)
   }
 }
