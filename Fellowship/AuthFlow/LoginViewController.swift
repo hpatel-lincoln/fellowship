@@ -32,6 +32,8 @@ class LoginViewController: UIViewController {
   
   var didCompleteLogin: (() -> Void)?
   
+  var loggedOut: Bool = false
+  
   private var loggingIn: Bool = false {
     didSet {
       loginButton.setNeedsUpdateConfiguration()
@@ -52,6 +54,9 @@ class LoginViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     animateCoverImageView()
+    if loggedOut {
+      showLogoutMessage()
+    }
   }
   
   private func setupCoverImageView() {
@@ -68,17 +73,17 @@ class LoginViewController: UIViewController {
     buttonConfiguration.cornerStyle = .medium
     
     buttonConfiguration.titleTextAttributesTransformer =
-      UIConfigurationTextAttributesTransformer { input in
-        var output = input
-        output.font = .preferredFont(forTextStyle: .headline)
-        return output
-      }
+    UIConfigurationTextAttributesTransformer { input in
+      var output = input
+      output.font = .preferredFont(forTextStyle: .headline)
+      return output
+    }
     
     buttonConfiguration.image = UIImage(systemName: "chevron.right")
     buttonConfiguration.imagePadding = 8
     buttonConfiguration.imagePlacement = .trailing
     buttonConfiguration.preferredSymbolConfigurationForImage =
-      UIImage.SymbolConfiguration(scale: .medium)
+    UIImage.SymbolConfiguration(scale: .medium)
     
     loginButton.configuration = buttonConfiguration
     
@@ -97,6 +102,17 @@ class LoginViewController: UIViewController {
     UIView.animate(withDuration: 0.5) { [weak self] in
       self?.view.layoutIfNeeded()
     }
+  }
+  
+  private func showLogoutMessage() {
+    let alert = UIAlertController(
+      title: "Logged Out",
+      message: "You have been logged out.",
+      preferredStyle: .alert
+    )
+    let defaultAction = UIAlertAction(title: "Okay", style: .default)
+    alert.addAction(defaultAction)
+    present(alert, animated: true)
   }
   
   @IBAction

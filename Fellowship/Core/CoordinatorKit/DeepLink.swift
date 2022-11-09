@@ -8,5 +8,5 @@
 import Foundation
 
 enum DeepLink: String {
-  case login
+  case loggedOut
 }
