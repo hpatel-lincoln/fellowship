@@ -12,6 +12,7 @@ protocol FollowListViewControllerDelegate: AnyObject {
   func didScroll(_ scrollView: UIScrollView)
   func didEndDragging(_ scrollView: UIScrollView)
   func didEndDecelerating(_ scrollView: UIScrollView)
+  func didReceiveUnauthorized()
 }
 
 class FollowListViewController: UIViewController {
@@ -99,8 +100,12 @@ class FollowListViewController: UIViewController {
     }.done { userList in
       self.users = userList.users
       self.tableView.reloadData()
-    }.catch { error in
-      print(error)
+    }.catch { [weak self] error in
+      if case NetworkError.unauthorized = error {
+        self?.delegate?.didReceiveUnauthorized()
+      } else {
+        print(error)
+      }
     }
   }
 }

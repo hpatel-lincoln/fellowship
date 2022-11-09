@@ -39,6 +39,11 @@ class AppCoordinator: NavigationCoordinator {
   
   private func startMainFlow(with link: DeepLink?) {
     let mainCoordinator = coordinatorFactory.makeMainCoordinator(with: router)
+    mainCoordinator.didCompleteFlow = { [unowned self] in
+      userSession.logout()
+      coordinator = nil
+      startAuthFlow(with: .loggedOut)
+    }
     coordinator = mainCoordinator
     coordinator?.start(with: link)
   }
@@ -50,6 +55,6 @@ class AppCoordinator: NavigationCoordinator {
       startMainFlow(with: link)
     }
     coordinator = authCoordinator
-    coordinator?.start(with: nil)
+    coordinator?.start(with: link)
   }
 }

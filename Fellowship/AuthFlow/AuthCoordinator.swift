@@ -26,14 +26,20 @@ class AuthCoordinator: NavigationCoordinator {
   
   func start(with link: DeepLink?) {
     if hasStarted == false {
-      showLogin()
+      showLogin(with: link)
       hasStarted = true
     }
   }
   
-  private func showLogin() {
+  private func showLogin(with link: DeepLink?) {
     let loginViewController = factory.makeLoginViewController()
     loginViewController.didCompleteLogin = didCompleteFlow
+    if
+      let deepLink = link,
+      case DeepLink.loggedOut = deepLink
+    {
+      loginViewController.loggedOut = true
+    }
     router.setRootController(loginViewController, hideBar: true)
   }
 }
