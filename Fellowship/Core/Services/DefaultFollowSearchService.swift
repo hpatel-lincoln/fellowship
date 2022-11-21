@@ -24,7 +24,7 @@ class DefaultFollowSearchService: FollowSearchService {
     )
     
     return firstly {
-      authHttpClient.perform(request: request, withRetries: 1)
+      authHttpClient.perform(request: request)
     }.then { data -> Promise<TwitterUserList> in
       do {
         let decoder = JSONDecoder()
@@ -44,7 +44,7 @@ class DefaultFollowSearchService: FollowSearchService {
     )
     
     return firstly {
-      authHttpClient.perform(request: request, withRetries: 1)
+      authHttpClient.perform(request: request)
     }.then { data -> Promise<TwitterUserList> in
       do {
         let decoder = JSONDecoder()

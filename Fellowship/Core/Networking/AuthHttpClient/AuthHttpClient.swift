@@ -21,3 +21,9 @@ protocol AuthHttpClient {
    */
   func perform(request: HttpRequest, withRetries retryCount: Int) -> Promise<Data>
 }
+
+extension AuthHttpClient {
+  func perform(request: HttpRequest) -> Promise<Data> {
+    return perform(request: request, withRetries: 1)
+  }
+}
