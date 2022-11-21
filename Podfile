@@ -8,4 +8,9 @@ target 'Fellowship' do
   # Pods for Fellowship
   pod "PromiseKit"
   pod "KeychainSwift"
+
+  target 'FellowshipTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 end

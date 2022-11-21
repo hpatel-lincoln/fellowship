@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		157D12922DC5148E33263EA8 /* libPods-FellowshipTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1E7B5752721AE07DD709A80 /* libPods-FellowshipTests.a */; };
 		2708511C3F1CE22D7849F725 /* libPods-Fellowship.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */; };
 		391085C0290C1E4000779F89 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085BF290C1E4000779F89 /* User.swift */; };
 		391085C3290C1F6300779F89 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085C2290C1F6300779F89 /* UserService.swift */; };
@@ -50,9 +51,21 @@
 		39BB161E2911833D0008040D /* FollowSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BB161D2911833D0008040D /* FollowSearchService.swift */; };
 		39BB1620291183E10008040D /* DefaultFollowSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BB161F291183E10008040D /* DefaultFollowSearchService.swift */; };
 		39BB162229118D100008040D /* FollowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BB162129118D100008040D /* FollowListViewController.swift */; };
+		39D077A6292BEC35008A1563 /* FellowshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D077A5292BEC35008A1563 /* FellowshipTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		39D077A7292BEC35008A1563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 397E7028290B053800DB0442 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 397E702F290B053800DB0442;
+			remoteInfo = Fellowship;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0730CEF45ECE17C173B04AF1 /* Pods-FellowshipTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FellowshipTests.release.xcconfig"; path = "Target Support Files/Pods-FellowshipTests/Pods-FellowshipTests.release.xcconfig"; sourceTree = "<group>"; };
 		391085BF290C1E4000779F89 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		391085C2290C1F6300779F89 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		391085C4290C2A1400779F89 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
@@ -97,8 +110,12 @@
 		39BB161D2911833D0008040D /* FollowSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowSearchService.swift; sourceTree = "<group>"; };
 		39BB161F291183E10008040D /* DefaultFollowSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFollowSearchService.swift; sourceTree = "<group>"; };
 		39BB162129118D100008040D /* FollowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewController.swift; sourceTree = "<group>"; };
+		39D077A3292BEC35008A1563 /* FellowshipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FellowshipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		39D077A5292BEC35008A1563 /* FellowshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FellowshipTests.swift; sourceTree = "<group>"; };
 		5939201146305C1E37AD7A3C /* Pods-Fellowship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.release.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.release.xcconfig"; sourceTree = "<group>"; };
+		5AF1BD9329BB169FD4B3452A /* Pods-FellowshipTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FellowshipTests.debug.xcconfig"; path = "Target Support Files/Pods-FellowshipTests/Pods-FellowshipTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fellowship.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1E7B5752721AE07DD709A80 /* libPods-FellowshipTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FellowshipTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D11F0CB6E08B47F656106A /* Pods-Fellowship.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fellowship.debug.xcconfig"; path = "Target Support Files/Pods-Fellowship/Pods-Fellowship.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +125,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2708511C3F1CE22D7849F725 /* libPods-Fellowship.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39D077A0292BEC35008A1563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				157D12922DC5148E33263EA8 /* libPods-FellowshipTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				397E7032290B053800DB0442 /* Fellowship */,
+				39D077A4292BEC35008A1563 /* FellowshipTests */,
 				397E7031290B053800DB0442 /* Products */,
 				58598256EAF63F97DC99BDA9 /* Pods */,
 				56AB4BB8D6D022B1A29360A1 /* Frameworks */,
@@ -265,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				397E7030290B053800DB0442 /* Fellowship.app */,
+				39D077A3292BEC35008A1563 /* FellowshipTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -304,10 +331,19 @@
 			path = Factories;
 			sourceTree = "<group>";
 		};
+		39D077A4292BEC35008A1563 /* FellowshipTests */ = {
+			isa = PBXGroup;
+			children = (
+				39D077A5292BEC35008A1563 /* FellowshipTests.swift */,
+			);
+			path = FellowshipTests;
+			sourceTree = "<group>";
+		};
 		56AB4BB8D6D022B1A29360A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */,
+				D1E7B5752721AE07DD709A80 /* libPods-FellowshipTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -317,6 +353,8 @@
 			children = (
 				E4D11F0CB6E08B47F656106A /* Pods-Fellowship.debug.xcconfig */,
 				5939201146305C1E37AD7A3C /* Pods-Fellowship.release.xcconfig */,
+				5AF1BD9329BB169FD4B3452A /* Pods-FellowshipTests.debug.xcconfig */,
+				0730CEF45ECE17C173B04AF1 /* Pods-FellowshipTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -342,6 +380,25 @@
 			productReference = 397E7030290B053800DB0442 /* Fellowship.app */;
 			productType = "com.apple.product-type.application";
 		};
+		39D077A2292BEC35008A1563 /* FellowshipTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39D077AB292BEC35008A1563 /* Build configuration list for PBXNativeTarget "FellowshipTests" */;
+			buildPhases = (
+				D324EE90CB9E1A62A75F1D92 /* [CP] Check Pods Manifest.lock */,
+				39D0779F292BEC35008A1563 /* Sources */,
+				39D077A0292BEC35008A1563 /* Frameworks */,
+				39D077A1292BEC35008A1563 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				39D077A8292BEC35008A1563 /* PBXTargetDependency */,
+			);
+			name = FellowshipTests;
+			productName = FellowshipTests;
+			productReference = 39D077A3292BEC35008A1563 /* FellowshipTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -354,6 +411,10 @@
 				TargetAttributes = {
 					397E702F290B053800DB0442 = {
 						CreatedOnToolsVersion = 14.0.1;
+					};
+					39D077A2292BEC35008A1563 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 397E702F290B053800DB0442;
 					};
 				};
 			};
@@ -371,6 +432,7 @@
 			projectRoot = "";
 			targets = (
 				397E702F290B053800DB0442 /* Fellowship */,
+				39D077A2292BEC35008A1563 /* FellowshipTests */,
 			);
 		};
 /* End PBXProject section */
@@ -384,6 +446,13 @@
 				391085DC290C787000779F89 /* Auth.storyboard in Resources */,
 				397E703D290B053900DB0442 /* Assets.xcassets in Resources */,
 				3981F9BE290DDF7A003611D8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39D077A1292BEC35008A1563 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +475,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Fellowship-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D324EE90CB9E1A62A75F1D92 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FellowshipTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -460,7 +551,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		39D0779F292BEC35008A1563 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39D077A6292BEC35008A1563 /* FellowshipTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		39D077A8292BEC35008A1563 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 397E702F290B053800DB0442 /* Fellowship */;
+			targetProxy = 39D077A7292BEC35008A1563 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		397E7042290B053900DB0442 /* Debug */ = {
@@ -604,7 +711,6 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -635,7 +741,42 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		39D077A9292BEC35008A1563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AF1BD9329BB169FD4B3452A /* Pods-FellowshipTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BJ636W9RZ7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.FellowshipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fellowship.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Fellowship";
+			};
+			name = Debug;
+		};
+		39D077AA292BEC35008A1563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0730CEF45ECE17C173B04AF1 /* Pods-FellowshipTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BJ636W9RZ7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.FellowshipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fellowship.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Fellowship";
 			};
 			name = Release;
 		};
@@ -656,6 +797,15 @@
 			buildConfigurations = (
 				397E7045290B053900DB0442 /* Debug */,
 				397E7046290B053900DB0442 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39D077AB292BEC35008A1563 /* Build configuration list for PBXNativeTarget "FellowshipTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39D077A9292BEC35008A1563 /* Debug */,
+				39D077AA292BEC35008A1563 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
