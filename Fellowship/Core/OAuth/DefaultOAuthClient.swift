@@ -37,8 +37,8 @@ class DefaultOAuthClient: NSObject, OAuthClient {
   init(
     authHost: String, authPath: String,
     tokenHost: String, tokenPath: String,
-    clientID: String, redirectURI: String, scope: String,
-    httpClient: HttpClient = DefaultHttpClient()
+    clientID: String, redirectURI: String,
+    scope: String, httpClient: HttpClient
   ) {
     self.authHost = authHost
     self.authPath = authPath
@@ -89,6 +89,8 @@ class DefaultOAuthClient: NSObject, OAuthClient {
       return Promise(error: error)
     }
   }
+  
+  // MARK: - Private methods
   
   private func makeAuthorizationURL() -> Promise<URL> {
     return Promise { seal in
@@ -196,8 +198,6 @@ class DefaultOAuthClient: NSObject, OAuthClient {
       return Promise(error: error)
     }
   }
-  
-  // MARK: - Private methods
   
   private func generateCodeVerifier() -> String? {
     var buffer = [UInt8](repeating: 0, count: 32)

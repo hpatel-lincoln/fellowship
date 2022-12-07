@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
     setupHeadingView()
     setupPageControl()
     setupScrollView()
-    setupPlaceholderView()
+    setupIslandBackgroundView()
     
     nameLabel.font = .preferredFont(forTextStyle: .headline)
     nameLabel.text = userSession.currentUser?.name
@@ -218,18 +218,18 @@ class MainViewController: UIViewController {
     NSLayoutConstraint.activate(stackViewCon)
   }
   
-  private func setupPlaceholderView() {
-    let placeholderView = UIView()
-    placeholderView.backgroundColor = .systemBackground
-    view.addSubview(placeholderView)
-    placeholderView.translatesAutoresizingMaskIntoConstraints = false
-    let placeholderViewCon = [
-      placeholderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-      placeholderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-      placeholderView.topAnchor.constraint(equalTo: view.topAnchor),
-      placeholderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+  private func setupIslandBackgroundView() {
+    let backgroundView = UIView()
+    backgroundView.backgroundColor = .systemBackground
+    view.addSubview(backgroundView)
+    backgroundView.translatesAutoresizingMaskIntoConstraints = false
+    let backgroundViewCon = [
+      backgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+      backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+      backgroundView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
     ]
-    NSLayoutConstraint.activate(placeholderViewCon)
+    NSLayoutConstraint.activate(backgroundViewCon)
   }
   
   private func addFollowListViewControllers(for userID: String) {
