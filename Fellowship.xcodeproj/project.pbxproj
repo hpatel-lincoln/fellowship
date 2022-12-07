@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		157D12922DC5148E33263EA8 /* libPods-FellowshipTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1E7B5752721AE07DD709A80 /* libPods-FellowshipTests.a */; };
 		2708511C3F1CE22D7849F725 /* libPods-Fellowship.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9D0EEC2DD57A84F16F50AC /* libPods-Fellowship.a */; };
+		3908CD18292D38D3007BA803 /* HttpClientTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3908CD17292D38D3007BA803 /* HttpClientTestCase.swift */; };
 		391085C0290C1E4000779F89 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085BF290C1E4000779F89 /* User.swift */; };
 		391085C3290C1F6300779F89 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085C2290C1F6300779F89 /* UserService.swift */; };
 		391085C5290C2A1400779F89 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391085C4290C2A1400779F89 /* UserSession.swift */; };
@@ -66,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		0730CEF45ECE17C173B04AF1 /* Pods-FellowshipTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FellowshipTests.release.xcconfig"; path = "Target Support Files/Pods-FellowshipTests/Pods-FellowshipTests.release.xcconfig"; sourceTree = "<group>"; };
+		3908CD17292D38D3007BA803 /* HttpClientTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClientTestCase.swift; sourceTree = "<group>"; };
 		391085BF290C1E4000779F89 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		391085C2290C1F6300779F89 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		391085C4290C2A1400779F89 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				39D077A5292BEC35008A1563 /* FellowshipTests.swift */,
+				3908CD17292D38D3007BA803 /* HttpClientTestCase.swift */,
 			);
 			path = FellowshipTests;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3908CD18292D38D3007BA803 /* HttpClientTestCase.swift in Sources */,
 				39D077A6292BEC35008A1563 /* FellowshipTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
